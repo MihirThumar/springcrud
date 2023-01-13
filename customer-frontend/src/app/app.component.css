@@ -1,0 +1,27 @@
+.heading {
+  font-family: Helvetica;
+  display: flex;
+  justify-content: right;
+  background: gainsboro;
+  font-size: 1.7vw;
+}
+.box{
+  width: 61%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+a{
+  padding: 3% 40%;
+  background: rgb(71, 156, 71);
+  border: 1px solid transparent;
+  border-radius: 10%;
+  text-decoration: none;
+  /* margin-right: 20px; */
+}
+a:hover{
+  background: rgb(4, 223, 252);
+}
+.add_btn{
+  margin-left: 50%;
+}

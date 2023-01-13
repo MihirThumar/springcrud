@@ -1,0 +1,73 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.main_div {
+  font-family: Helvetica;
+  display: flex;
+  flex-direction: column;
+  padding: 2%;
+  align-items: center;
+}
+.title{
+  color: darkgray;
+}
+.table {
+  font-family: sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 2%;
+  overflow-x: auto;
+  color: rgb(128, 209, 128);
+}
+
+.table th {
+  color: rgb(255, 255, 255);
+  border: 1px solid gainsboro;
+  padding: 1.5% 0.9%;
+  text-align: left;
+
+}
+
+.table td {
+  padding: 1% 0 1% 0.5%;
+  /* color: rgb(206, 212, 214); */
+  border: 1px solid gainsboro;
+}
+
+.table tr:nth-child(even) {
+  background: rgba(169, 169, 169, 0.397);
+  color: rgb(212, 154, 5);
+}
+
+.table tr:hover {
+  background: rgba(0, 0, 0, 0.726);
+}
+
+.btn {
+  background: transparent;
+  padding: 3%;
+  font-size: 0.9vw;
+  margin-left: 10%;
+  border: 1px solid rgb(75, 74, 74);
+  border-radius: 5%;
+}
+
+.edit {
+  color: rgb(135, 206, 250);
+}
+
+.edit:hover {
+  background-color: rgb(135, 206, 250);
+  color: black;
+}
+
+.delete {
+  color: rgb(250, 132, 132);
+}
+
+.delete:hover {
+  background-color: rgb(250, 132, 132);
+  color: black;
+}

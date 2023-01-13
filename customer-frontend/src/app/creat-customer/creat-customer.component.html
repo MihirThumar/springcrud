@@ -1,0 +1,55 @@
+<form (ngSubmit)="onSubmit()" [FormGroup]="form">
+<div class="customer_registration_container">
+  <div class="inner_box">
+      <div class="input_field">
+        <label for="firstname">First Name</label>
+        <input type="text" id="firstname" name="firstName" [(ngModel)]="customer.firstName" #first="ngModel">
+        <span *ngIf="first.touched && first.invalid" class="danger">
+          Email is required
+        </span>
+      </div>
+      <div class="input_field">
+        <label for="lastname">Last Name</label>
+        <input type="text" id="lastname" name="lastName" [(ngModel)]="customer.lastName" required>
+      </div>
+      <div class="input_field">
+        <label for="dateofbirth">Date Of Birth</label>
+        <input type="date" id="dateofbirth" name="dateOfBirth" [(ngModel)]="customer.dateOfBirth" required
+          min="1900-01-01" max="2023-01-30">
+      </div>
+      <div class="input_field">
+        <label for="mobile">Mobile</label>
+        <input type="text" id="mobile" name="mobileNumber" [(ngModel)]="customer.mobileNumber">
+      </div>
+      <div class="input_field">
+        <label for="address-1">Address 1</label>
+        <input type="text" id="address-1" name="addressOne" [(ngModel)]="customer.addressOne">
+      </div>
+      <div class="input_field">
+        <label for="address-2">Address 2</label>
+        <input type="text" id="address-2" name="addressTwo" [(ngModel)]="customer.addressTwo">
+      </div>
+      <div class="input_field">
+        <label for="age">Age</label>
+        <input type="number" id="age" name="age" min="00" max="99" [(ngModel)]="customer.age">
+      </div>
+      <div class="input_field radio">
+        <p><label for="gender">Gender</label></p>
+        <p><label for="male">Male</label>
+          <input type="radio" id="male" name="gender" [(ngModel)]="customer.gender" value="male">
+          <label for="female">Female</label>
+          <input type="radio" id="female" name="gender" [(ngModel)]="customer.gender" value="female">
+        </p>
+      </div>
+      <div class="input_field">
+        <label for="email">Email</label>
+        <input type="email" id="emial" name="email" [(ngModel)]="customer.email">
+      </div>
+      <div class="btn_class">
+        <button routerLink="" class="cancel">Cancel</button>
+        <button class="submit">Submit</button>
+      </div>
+    </div>
+  </div>
+</form>
+<router-outlet></router-outlet>

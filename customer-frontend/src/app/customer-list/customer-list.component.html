@@ -1,0 +1,31 @@
+<div class="main_div">
+  <div class="title">
+    <h2>Customer List</h2>
+  </div>
+  <table class="table">
+    <thead>
+        <th hidden>id</th>
+        <th>Name</th>
+        <th>Date of Birth</th>
+        <th>Mobile Number</th>
+        <th>Address</th>
+        <th>Gender</th>
+        <th>Email</th>
+        <th>Action</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let customer of customers">
+        <td hidden>{{customer.id}}</td>
+        <td>{{customer.firstName}} {{customer.lastName}}</td>
+        <td>{{customer.dateOfBirth}}</td>
+        <td>{{customer.mobileNumber}}</td>
+        <td>{{customer.addressOne}} {{customer.addressTwo}}</td>
+        <td>{{customer.gender}}</td>
+        <td>{{customer.email}}</td>
+        <td><button (click)="updateCustomer(customer.id)" class="edit btn">Edit</button>
+          <button class="delete btn" (click)="deleteCustomer(customer.id)">Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<!-- <router-outlet></router-outlet> -->
