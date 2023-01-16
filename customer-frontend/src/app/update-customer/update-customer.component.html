@@ -1,52 +1,75 @@
-<form (ngSubmit)="onUpdate()">
-<div class="customer_registration_container">
-  <div class="inner_box">
-    <input type="number" name="id" hidden [(ngModel)]="customer.id">
-    <div class="input_field">
-      <label for="firstname">First Name</label>
-      <input type="text" id="firstname" name="firstName" [(ngModel)]="customer.firstName" >
-    </div>
-    <div class="input_field">
-      <label for="lastname">Last Name</label>
-      <input type="text" id="lastname" name="lastName" [(ngModel)]="customer.lastName">
-    </div>
-    <div class="input_field">
-      <label for="dateofbirth">Date Of Birth</label>
-      <input type="date" id="dateofbirth" name="dateOfBirth" [(ngModel)]="customer.dateOfBirth">
-    </div>
-    <div class="input_field">
-      <label for="mobile">Mobile</label>
-      <input type="text" id="mobile" name="mobileNumber" [(ngModel)]="customer.mobileNumber">
-    </div>
-    <div class="input_field">
-      <label for="address-1">Address 1</label>
-      <input type="text" id="address-1" name="addressOne" [(ngModel)]="customer.addressOne">
-    </div>
-    <div class="input_field">
-      <label for="address-2">Address 2</label>
-      <input type="text" id="address-2" name="addressTwo" [(ngModel)]="customer.addressTwo">
-    </div>
-    <div class="input_field">
-      <label for="age">Age</label>
-      <input type="number" id="age" name="age" min="00" max="99" [(ngModel)]="customer.age">
-    </div>
-    <div class="input_field radio">
-      <p><label for="gender">Gender</label></p>
-      <p><label for="male">Male</label>
-        <input type="radio" id="male" name="gender" [(ngModel)]="customer.gender" value="male">
-        <label for="female">Female</label>
-        <input type="radio" id="female" name="gender" [(ngModel)]="customer.gender" value="female">
-      </p>
-    </div>
-    <div class="input_field">
-      <label for="email">Email</label>
-      <input type="email" id="emial" name="email" [(ngModel)]="customer.email">
-    </div>
-    <div class="btn_class">
-      <button routerLink="" class="cancel">Cancel</button>
-      <button class="submit">Update</button>
+<form (ngSubmit)="onUpdate()" [formGroup]="form">
+  <div class="customer_registration_container">
+    <div class="inner_box">
+
+      <div class="input_field">
+        <label for="firstname">First Name</label>
+        <input type="text" id="firstname" formControlName="firstName" [(ngModel)]="customer.firstName">
+      </div>
+      <span *ngIf="firstName && firstName.touched && firstName.invalid" class="danger"> This Field is Not valid </span>
+
+      <div class="input_field">
+        <label for="lastname">Last Name</label>
+        <input type="text" id="lastname" formControlName="lastName" [(ngModel)]="customer.lastName">
+      </div>
+      <span *ngIf="lastName && lastName.touched && lastName.invalid" class="danger"> This Field is Not valid </span>
+
+      <div class="input_field">
+        <label for="dateofbirth">Date Of Birth</label>
+        <input type="date" id="dateofbirth" formControlName="dateOfBirth" [(ngModel)]="customer.dateOfBirth"  min="{{minDate}}" max="{{maxDate}}">
+      </div>
+      <span class="danger">{{dateMssg}}</span>
+      <span *ngIf="dateOfBirth && dateOfBirth.touched && dateOfBirth.invalid" class="danger"> Date is Not valid  </span>
+
+      <div class="input_field">
+        <label for="mobile">Mobile</label>
+        <input type="text" id="mobile" formControlName="mobileNumber" [(ngModel)]="customer.mobileNumber">
+      </div>
+      <span *ngIf="mobileNumber && mobileNumber.touched && mobileNumber.invalid" class="danger">Number is Not valid</span>
+
+      <div class="input_field">
+        <label for="address-1">Address 1</label>
+        <input type="text" id="address-1" formControlName="addressOne" [(ngModel)]="customer.addressOne">
+      </div>
+      <span *ngIf="addressOne && addressOne.touched && addressOne.invalid" class="danger">Address is Not valid </span>
+
+      <div class="input_field">
+        <label for="address-2">Address 2</label>
+        <input type="text" id="address-2" formControlName="addressTwo" [(ngModel)]="customer.addressTwo">
+      </div>
+      <span *ngIf="addressTwo && addressTwo.touched && addressTwo.invalid" class="danger">Address is Not valid </span>
+
+      <div class="input_field">
+        <label for="age">Age</label>
+        <input type="number" id="age" formControlName="age" min="00" max="99" [(ngModel)]="customer.age">
+      </div>
+      <span *ngIf="age && age.touched && age.invalid" class="danger">Age is Not valid </span>
+
+      <div class="input_field radio">
+        <p><label for="gender">Gender</label></p>
+        <p>
+          <label for="male">Male</label>
+          <input type="radio" id="male" formControlName="gender" [(ngModel)]="customer.gender" value="male"
+            name="gender">
+          <label for="female">Female</label>
+          <input type="radio" id="female" formControlName="gender" [(ngModel)]="customer.gender" value="female"
+            name="gender">
+        </p>
+      </div>
+      <span class="danger" *ngIf="gender?.touched && gender?.invalid"></span>
+
+      <div class="input_field">
+        <label for="email">Email</label>
+        <input type="email" id="emial" formControlName="email" [(ngModel)]="customer.email">
+      </div>
+      <span *ngIf="email && email.touched && email.invalid" class="danger">Email is Not valid </span>
+
+      <div class="btn_class">
+        <button routerLink="" class="cancel">Cancel</button>
+        <button class="submit" #submit>Update</button>
+      </div>
+      <span class="danger" style="margin: 2% 0 0 13%;">{{mssg}}</span>
     </div>
   </div>
-</div>
 </form>
 <router-outlet></router-outlet>

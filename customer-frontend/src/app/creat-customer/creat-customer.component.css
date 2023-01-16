@@ -79,7 +79,13 @@
   color: darkblue;
   padding: 1.8%;
 }
+.submit:disabled{
+  background-color: rgba(85, 107, 47, 0.541);
+}
 .danger{
-  color: darkred;
+  color: rgb(255, 104, 104);
   display: block;
+  margin-left: 50%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: small;
 }

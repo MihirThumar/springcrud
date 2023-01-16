@@ -10,9 +10,39 @@
   padding: 2%;
   align-items: center;
 }
-.title{
+
+.title {
   color: darkgray;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
 }
+
+.cover_div{
+  width: 55%;
+  display: flex;
+  justify-content: right;
+}
+
+.add_btn {
+  width: 45%;
+  display: flex;
+  justify-content: right;
+}
+
+.inner_add_btn{
+  background: rgba(8, 95, 12, 0.699);
+  padding: 1.5% 2%;
+  border-radius: 10%;
+  cursor: grab;
+}
+
+.inner_add_btn:hover{
+  background: rgb(110, 216, 115);
+  color: black;
+}
+
 .table {
   font-family: sans-serif;
   border-collapse: collapse;
@@ -27,22 +57,25 @@
   border: 1px solid gainsboro;
   padding: 1.5% 0.9%;
   text-align: left;
-
 }
 
 .table td {
-  padding: 1% 0 1% 0.5%;
-  /* color: rgb(206, 212, 214); */
-  border: 1px solid gainsboro;
+  padding: 1% 0 1% 1%;
+  /* border: 1px solid gainsboro; */
 }
 
 .table tr:nth-child(even) {
-  background: rgba(169, 169, 169, 0.397);
+  background: rgb(0, 0, 0);
   color: rgb(212, 154, 5);
 }
 
+.table tr:nth-child(even):hover {
+  background: rgb(0, 0, 0);
+  color: rgb(255, 196, 0);
+}
+
 .table tr:hover {
-  background: rgba(0, 0, 0, 0.726);
+  color: rgb(122, 252, 122);
 }
 
 .btn {
@@ -50,12 +83,12 @@
   padding: 3%;
   font-size: 0.9vw;
   margin-left: 10%;
-  border: 1px solid rgb(75, 74, 74);
-  border-radius: 5%;
+  border-radius: 10%;
 }
 
 .edit {
   color: rgb(135, 206, 250);
+  border: none;
 }
 
 .edit:hover {
@@ -65,6 +98,7 @@
 
 .delete {
   color: rgb(250, 132, 132);
+  border: none;
 }
 
 .delete:hover {

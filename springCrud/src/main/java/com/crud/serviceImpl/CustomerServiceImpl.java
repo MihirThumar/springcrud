@@ -17,7 +17,7 @@ public class CustomerServiceImpl implements CustomerService {
 	@Autowired
 	private CustomerRepository customerRepository;
 
-//	adding customer
+	//	adding customer
 	@Override
 	public Object addCustomer(Customer customer) {
 		try {
@@ -30,14 +30,12 @@ public class CustomerServiceImpl implements CustomerService {
 		}
 	}
 
-//	getting list of all customeradding customer
+	//	getting list of all customeradding customer
 	@Override
 	public Object getCustomer() {
 		try {
 			List<Customer> findAll = customerRepository.findAll();
 			return findAll;
-//			return new RestResponse().setCode(202).setStatus(true).setMessage("Succesfully get list of all customer")
-//					.setData(findAll);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new RestResponse().setCode(404).setStatus(false)
@@ -45,7 +43,7 @@ public class CustomerServiceImpl implements CustomerService {
 		}
 	}
 
-//	get customer by id
+	//	get customer by id
 	public Object getCustomerById(int id) {
 		try {
 			Optional<Customer> customer = customerRepository.findById(id);
@@ -57,33 +55,8 @@ public class CustomerServiceImpl implements CustomerService {
 		}
 	}
 
-//	updatting customer
-//	@Override
-//	public Object updateCustomer(Customer customer) {
-//		try {
-//			Customer save = null;
-//			int id = customer.getId();
-//			List<Customer> findAll = customerRepository.findAll();
-//			for (Customer c : findAll) {
-//				System.out.println(c.getId());
-//				int id2 = c.getId();
-//				if (id == id2) {
-//					save = customerRepository.save(customer);
-//				} else {
-//					return new RestResponse().setCode(202).setStatus(true)
-//							.setMessage("Custmore is not exit please first sign up").setData("");
-//				}
-//			}
-//			return new RestResponse().setCode(202).setStatus(true).setMessage("Succesfully updated the customer")
-//					.setData(save);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			return new RestResponse().setCode(404).setStatus(false)
-//					.setMessage("OOPS!! Something went wrong,try again sometime later").setData(e.getMessage());
-//		}
-//	}
 
-//	updatting customer
+	//	updatting customer
 	@Override
 	public Object updateCustomer(Customer newCustomer, int id) {
 		try {
@@ -108,7 +81,7 @@ public class CustomerServiceImpl implements CustomerService {
 		}
 	}
 
-//	deletting customer
+	//	deletting customer
 	@Override
 	public Object deleteCustomer(Integer id) {
 		try {

@@ -1,4 +1,4 @@
-type Genders = {
+export type Genders = {
   male: string;
   female: string;
 }

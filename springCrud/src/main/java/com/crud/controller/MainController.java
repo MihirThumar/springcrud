@@ -76,4 +76,5 @@ public class MainController {
 					.setMessage("Something wrong in sending request, try sometime later").setData(e.getMessage());
 		}
 	}
+
 }

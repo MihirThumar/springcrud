@@ -78,3 +78,10 @@
   color: darkblue;
   padding: 1.8%;
 }
+.danger{
+  color: rgb(255, 104, 104);
+  display: block;
+  margin-left: 50%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: small;
+}

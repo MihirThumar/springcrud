@@ -1,6 +1,7 @@
 <div class="main_div">
   <div class="title">
-    <h2>Customer List</h2>
+    <div class="cover_div"><h2>Customer List</h2></div>
+    <div class="add_btn" ><div routerLink="register" class="inner_add_btn">+</div></div>
   </div>
   <table class="table">
     <thead>
@@ -10,7 +11,6 @@
         <th>Mobile Number</th>
         <th>Address</th>
         <th>Gender</th>
-        <th>Email</th>
         <th>Action</th>
     </thead>
     <tbody>
@@ -21,11 +21,10 @@
         <td>{{customer.mobileNumber}}</td>
         <td>{{customer.addressOne}} {{customer.addressTwo}}</td>
         <td>{{customer.gender}}</td>
-        <td>{{customer.email}}</td>
-        <td><button (click)="updateCustomer(customer.id)" class="edit btn">Edit</button>
-          <button class="delete btn" (click)="deleteCustomer(customer.id)">Delete</button></td>
+        <td><button (click)="updateCustomer(customer.id)" class="edit btn"><i class="fa-solid fa-user-pen"></i></button>
+          <button class="delete btn" (click)="deleteCustomer(customer.id)"><i class="fa-sharp fa-solid fa-trash"></i></button></td>
       </tr>
     </tbody>
   </table>
 </div>
-<!-- <router-outlet></router-outlet> -->
+<router-outlet></router-outlet>

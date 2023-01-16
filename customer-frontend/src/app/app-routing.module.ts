@@ -5,7 +5,7 @@ import { UpdateCustomerComponent } from './update-customer/update-customer.compo
 import { CustomerListComponent } from './customer-list/customer-list.component';
 
 const routes: Routes = [
-  { path: 'register', component: CreatCustomerComponent },
+  { path: 'customer/register', component: CreatCustomerComponent },
   { path: 'update-customer/:id', component: UpdateCustomerComponent },
   { path: 'customer', component: CustomerListComponent},
   { path: '', redirectTo: 'customer', pathMatch: 'full'}
