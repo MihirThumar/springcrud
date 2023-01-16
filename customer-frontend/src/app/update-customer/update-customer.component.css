@@ -1,4 +1,4 @@
-.customer_registration_container{
+.customer_registration_container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -11,74 +11,104 @@
   left: 0;
   background: rgba(0, 0, 0, 0.658);
 }
-.inner_box{
+
+.inner_box {
   padding: 3%;
   border: 1px solid goldenrod;
   display: flex;
   flex-direction: column;
   color: wheat;
-  font-size: 1.3vw;
+  font-size: 1.1vw;
 }
-.input_field{
+
+.input_field {
   padding: 2%;
   display: inline-flex;
   width: 20em;
+  align-items: center;
 }
-.input_field input{
+
+.input_field input {
   padding: 0.5%;
   background: gainsboro;
-  font-size: 1.2vw;
+  font-size: 1vw;
   outline: none;
 }
-.input_field input[type="radio"]{
+
+.input_field input[type="radio"] {
   width: 20px;
 }
-.input_field input[type="date"]{
-  width: 100%;
+
+.input_field input[type="date"] {
+  width: 141%;
 }
-.input_field input[type="number"]{
-  width: 100%;
+
+.input_field input[type="number"] {
+  width: 141%;
 }
-.radio{
+
+.radio {
   justify-content: space-between;
 }
-.input_field label{
+
+.radio p:nth-child(2) {
+  margin-right: 19%;
+}
+
+.textarea {
+  resize: none;
+  width: 140%;
+  outline: none;
+  background: gainsboro;
+}
+
+.input_field label {
   width: 100%;
 }
-.btn_class{
+
+.btn_class {
   display: flex;
-  flex-direction: column;
-  margin: 5% 0 0 0 ;
+  justify-content: space-between;
+  align-items: center;
+  margin: 5% 0 0 0;
 }
-.cancel{
+
+.cancel {
   text-decoration: none;
-  width: 100%;
   background-color: darkred;
   color: aliceblue;
   text-align: center;
   font-size: 1.5vw;
-  padding: 2%;
+  padding: 6%;
   margin: 0 0 2% 0;
+  border-radius: 6%;
 }
-.cancel:hover{
+
+.cancel:hover {
   background: lightcoral;
   color: darkblue;
-  padding: 1.8%;
 }
-.submit{
-  width: 100%;
+
+.submit {
   background: darkgreen;
   color: aliceblue;
   text-align: center;
   font-size: 1.5vw;
-  padding: 2%;
+  padding: 6%;
+  text-decoration: none;
+  border-radius: 6%;
 }
-.submit:hover{
+
+.submit:hover {
   background-color: lightgreen;
   color: darkblue;
-  padding: 1.8%;
 }
-.danger{
+
+.submit:disabled {
+  background-color: rgba(85, 107, 47, 0.541);
+}
+
+.danger {
   color: rgb(255, 104, 104);
   display: block;
   margin-left: 50%;

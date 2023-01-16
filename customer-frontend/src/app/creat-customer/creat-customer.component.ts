@@ -49,6 +49,10 @@ export class CreatCustomerComponent implements OnInit {
     }
   }
 
+  func(e: any) {
+    // let keyUnicode 
+  }
+
   form = new FormGroup({
     firstName: new FormControl('', [Validators.required]),
     lastName: new FormControl('', [Validators.required]),
