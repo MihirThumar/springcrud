@@ -15,17 +15,24 @@ export class CustomerListComponent {
   }
 
   customers: Customer[] = [];
-  date: any;
-  arr_date: string[] = [];
-  n_date!: string;
+
   private getCustmores() {
     this.custmoreService.getCustomers().subscribe(data => {
       this.customers = data;
       for (let c of this.customers) {
         let o_date = new Date(c.dateOfBirth);
-        this.n_date = o_date.getDate() + ' - ' + o_date.getMonth() + 1 + ' - ' + o_date.getFullYear();
+        let day: any = o_date.getDate();
+        let month: any = o_date.getMonth() + 1;
+
+        if (day < 10) {
+          day = '0' + day;
+        }
+        if (month < 10) {
+          month = '0' + month;
+        }
+
+        c.dateOfBirth = o_date.getDate() + '-' + month + '-' + o_date.getFullYear();
       }
-      this.arr_date.push(this.n_date);
     });
   }
 

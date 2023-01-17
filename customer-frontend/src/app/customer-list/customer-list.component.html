@@ -17,7 +17,7 @@
       <tr *ngFor="let customer of customers;">
         <td hidden>{{customer.id}}</td>
         <td>{{customer.firstName}} {{customer.lastName}}</td>
-        <td *ngFor="let date of arr_date">{{date}}</td>
+        <td>{{customer.dateOfBirth}}</td>
         <td>{{customer.mobileNumber}}</td>
         <td>{{customer.addressOne}} {{customer.addressTwo}}</td>
         <td>{{customer.gender}}</td>

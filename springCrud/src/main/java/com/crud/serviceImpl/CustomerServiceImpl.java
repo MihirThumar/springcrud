@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.crud.dao.CustomerRepository;
@@ -25,8 +27,7 @@ public class CustomerServiceImpl implements CustomerService {
 			return addCustomer;
 		} catch (Exception e) {
 			e.getMessage();
-			return new RestResponse().setCode(404).setStatus(false)
-					.setMessage("OOPS!! Something went wrong,try again sometime later").setData(e.getMessage());
+			return new ResponseEntity<Object>(e.getMessage(), new HttpHeaders(),404) ;
 		}
 	}
 
@@ -76,8 +77,7 @@ public class CustomerServiceImpl implements CustomerService {
 					.setData(save);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new RestResponse().setCode(404).setStatus(false)
-					.setMessage("OOPS!! Something went wrong,try again sometime later").setData(e.getMessage());
+			return new ResponseEntity<Object>(e.getMessage(), new HttpHeaders(),404) ;
 		}
 	}
 
