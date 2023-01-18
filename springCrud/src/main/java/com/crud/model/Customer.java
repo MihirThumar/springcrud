@@ -42,7 +42,7 @@ public class Customer {
 
 	@Column(columnDefinition = "SMALLINT", nullable = false)
 	@Min(1)
-	@Max(99)
+	@Max(150)
 	private int age;
 
 	@Column(nullable = false, columnDefinition = "ENUM('male','female')")

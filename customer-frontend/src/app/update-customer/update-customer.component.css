@@ -46,7 +46,7 @@
 }
 
 .input_field input[type="number"] {
-  width: 141%;
+  width: 125%;
 }
 
 .radio {
@@ -62,6 +62,7 @@
   width: 127%;
   outline: none;
   background: gainsboro;
+  font-size: 0.9vw;
 }
 
 .input_field label {
