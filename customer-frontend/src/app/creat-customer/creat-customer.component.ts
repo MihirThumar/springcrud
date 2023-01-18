@@ -139,4 +139,17 @@ export class CreatCustomerComponent implements OnInit {
     e.target.value = this.previous_pattern;
   }
 
+  mobile_pattern: any = new RegExp(/^[0-9+\s]*$/);
+  mobile_func(e:any){
+    let mobileValue = this.mobileNumber?.value;
+    if(this.mobile_pattern.test(mobileValue)){
+      this.previous_pattern = mobileValue;
+    }
+    e.target.value = this.previous_pattern;
+  }
+
+  age_func(e: any){
+    
+  }
+
 }

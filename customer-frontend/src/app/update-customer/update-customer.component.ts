@@ -129,7 +129,7 @@ export class UpdateCustomerComponent implements OnInit {
     return this.form.get('email');
   }
 
-  first_name_pattern: any = new RegExp(/^[a-zA-Z!@#$%\^&*)(+=._-]*$/);
+  first_name_pattern: any = new RegExp(/^[a-zA-Z!@#$%\&*)(^+=._-\s]*[a-zA-Z]+$/);
   previous_pattern: any = "";
   first_func(e: any) {
     let first = this.firstName?.value;
@@ -143,6 +143,15 @@ export class UpdateCustomerComponent implements OnInit {
     let last = this.lastName?.value;
     if(this.first_name_pattern.test(last)){
       this.previous_pattern = last;
+    }
+    e.target.value = this.previous_pattern;
+  }
+
+  mobile_pattern: any = new RegExp(/^[0-9+\s]*$/);
+  mobile_func(e:any){
+    let mobileValue = this.mobileNumber?.value;
+    if(this.mobile_pattern.test(mobileValue)){
+      this.previous_pattern = mobileValue;
     }
     e.target.value = this.previous_pattern;
   }

@@ -17,16 +17,16 @@
       <div class="input_field">
         <label for="dateofbirth">Date Of Birth :</label>
         <input type="date" id="dateofbirth" formControlName="dateOfBirth" [(ngModel)]="customer.dateOfBirth"
-          min="{{minDate}}" max="{{maxDate}}" >
+          min="{{minDate}}" max="{{maxDate}}">
       </div>
       <span class="danger">{{dateMssg}}</span>
       <span *ngIf="dateOfBirth && dateOfBirth.touched && dateOfBirth.invalid" class="danger"> Date is Not valid </span>
 
       <div class="input_field">
         <label for="mobile">Mobile :</label>
-        <input type="text" id="mobile" formControlName="mobileNumber" [(ngModel)]="customer.mobileNumber">
+        <input type="text" id="mobile" formControlName="mobileNumber" [(ngModel)]="customer.mobileNumber" (input)="mobile_func($event)">
       </div>
-      <span *ngIf="mobileNumber && mobileNumber.touched && mobileNumber.invalid" class="danger">Number is Not
+      <span *ngIf="mobileNumber && mobileNumber.touched && mobileNumber.invalid" class="danger">Number is Not"
         valid</span>
 
       <div class="input_field">

@@ -24,7 +24,7 @@
 
       <div class="input_field">
         <label for="mobile">Mobile :</label>
-        <input type="text" id="mobile" formControlName="mobileNumber" [(ngModel)]="customer.mobileNumber">
+        <input type="text" id="mobile" formControlName="mobileNumber" [(ngModel)]="customer.mobileNumber" (input)="mobile_func($event)">
       </div>
       <span class="danger">{{number_error_mssg}}</span>
       <span *ngIf="mobileNumber && mobileNumber.touched && mobileNumber.invalid" class="danger">Number is Not
