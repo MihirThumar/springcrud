@@ -19,7 +19,7 @@
   width: 100%;
 }
 
-.cover_div{
+.cover_div {
   width: 55%;
   display: flex;
   justify-content: right;
@@ -31,14 +31,14 @@
   justify-content: right;
 }
 
-.inner_add_btn{
+.inner_add_btn {
   background: rgba(8, 95, 12, 0.699);
   padding: 1.5% 2%;
   border-radius: 10%;
   cursor: grab;
 }
 
-.inner_add_btn:hover{
+.inner_add_btn:hover {
   background: rgb(110, 216, 115);
   color: black;
 }
@@ -89,6 +89,7 @@
 .edit {
   color: rgb(135, 206, 250);
   border: none;
+  cursor: pointer;
 }
 
 .edit:hover {
@@ -99,9 +100,70 @@
 .delete {
   color: rgb(250, 132, 132);
   border: none;
+  cursor: pointer;
 }
 
 .delete:hover {
   background-color: rgb(250, 132, 132);
   color: black;
+}
+
+.pop_up {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  font-family: fantasy;
+}
+
+.warning_div {
+  padding: 3%;
+  font-size: 1.5vw;
+  width: 35%;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid darkslateblue;
+  margin-top: 2%;
+}
+
+.warning_title {
+  align-self: center;
+  margin: 0 0 5% 0;
+}
+
+.warning_btn {
+  display: flex;
+  padding: 4% 0 2% 0;
+  justify-content: space-around;
+}
+
+.btn_no {
+  background: rgb(114, 193, 241);
+  padding: 1% 2%;
+  border: 1px solid rgb(114, 193, 241);
+  border-radius: 5%;
+  cursor: pointer;
+}
+
+.btn_no:hover {
+  background: lightseagreen;
+  border: 1px solid lightseagreen;
+}
+
+.btn_yes {
+  background: rgb(114, 193, 241);
+  padding: 1% 2%;
+  border: 1px solid rgb(114, 193, 241);
+  border-radius: 5%;
+  cursor: pointer;
+}
+
+.btn_yes:hover {
+  background: lightcoral;
+  border: 1px solid lightcoral;
 }

@@ -4,13 +4,15 @@
 
       <div class="input_field">
         <label for="firstname">First Name :</label>
-        <input type="text" id="firstname" formControlName="firstName" [(ngModel)]="customer.firstName" (input)="first_func($event)">
+        <input type="text" id="firstname" formControlName="firstName" [(ngModel)]="customer.firstName"
+          (input)="first_func($event)">
       </div>
       <span *ngIf="firstName && firstName.touched && firstName.invalid" class="danger"> This Field is Not valid </span>
 
       <div class="input_field">
         <label for="lastname">Last Name :</label>
-        <input type="text" id="lastname" formControlName="lastName" [(ngModel)]="customer.lastName" (input)="last_func($event)">
+        <input type="text" id="lastname" formControlName="lastName" [(ngModel)]="customer.lastName"
+          (input)="last_func($event)">
       </div>
       <span *ngIf="lastName && lastName.touched && lastName.invalid" class="danger"> This Field is Not valid </span>
 
@@ -24,7 +26,8 @@
 
       <div class="input_field">
         <label for="mobile">Mobile :</label>
-        <input type="text" id="mobile" formControlName="mobileNumber" [(ngModel)]="customer.mobileNumber" (input)="mobile_func($event)">
+        <input type="text" id="mobile" formControlName="mobileNumber" [(ngModel)]="customer.mobileNumber"
+          (input)="mobile_func($event)">
       </div>
       <span class="danger">{{number_error_mssg}}</span>
       <span *ngIf="mobileNumber && mobileNumber.touched && mobileNumber.invalid" class="danger">Number is Not
@@ -48,7 +51,7 @@
 
       <div class="input_field">
         <label for="age">Age :</label>
-        <input type="number" id="age" formControlName="age" min="00" max="99" [(ngModel)]="customer.age">
+        <input type="number" id="age" formControlName="age" [(ngModel)]="customer.age">
       </div>
       <span *ngIf="age && age.touched && age.invalid" class="danger">Age is Not valid </span>
 

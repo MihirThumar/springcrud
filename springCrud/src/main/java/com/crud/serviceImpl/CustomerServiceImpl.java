@@ -19,7 +19,7 @@ public class CustomerServiceImpl implements CustomerService {
 	@Autowired
 	private CustomerRepository customerRepository;
 
-	//	adding customer
+	// adding customer
 	@Override
 	public Object addCustomer(Customer customer) {
 		try {
@@ -27,11 +27,11 @@ public class CustomerServiceImpl implements CustomerService {
 			return addCustomer;
 		} catch (Exception e) {
 			e.getMessage();
-			return new ResponseEntity<Object>(e.getMessage(), new HttpHeaders(),404) ;
+			return new ResponseEntity<Object>(e.getMessage(), new HttpHeaders(), 404);
 		}
 	}
 
-	//	getting list of all customeradding customer
+	// getting list of all customer adding customer
 	@Override
 	public Object getCustomer() {
 		try {
@@ -39,25 +39,22 @@ public class CustomerServiceImpl implements CustomerService {
 			return findAll;
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new RestResponse().setCode(404).setStatus(false)
-					.setMessage("OOPS!! Something went wrong,try again sometime later").setData(e.getMessage());
+			return new ResponseEntity<Object>(e.getMessage(), new HttpHeaders(), 404);
 		}
 	}
 
-	//	get customer by id
+	// get customer by id
 	public Object getCustomerById(int id) {
 		try {
 			Optional<Customer> customer = customerRepository.findById(id);
 			return customer;
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new RestResponse().setCode(404).setStatus(false)
-					.setMessage("OOPS!! Something went wrong,try again sometime later").setData(e.getMessage());
+			return new ResponseEntity<Object>(e.getMessage(), new HttpHeaders(), 404);
 		}
 	}
 
-
-	//	updatting customer
+	// updating customer
 	@Override
 	public Object updateCustomer(Customer newCustomer, int id) {
 		try {
@@ -77,11 +74,11 @@ public class CustomerServiceImpl implements CustomerService {
 					.setData(save);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<Object>(e.getMessage(), new HttpHeaders(),404) ;
+			return new ResponseEntity<Object>(e.getMessage(), new HttpHeaders(), 404);
 		}
 	}
 
-	//	deletting customer
+	// deleting customer
 	@Override
 	public Object deleteCustomer(Integer id) {
 		try {
@@ -91,8 +88,7 @@ public class CustomerServiceImpl implements CustomerService {
 					.setData(customer);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new RestResponse().setCode(404).setStatus(false)
-					.setMessage("OOPS!! Something went wrong,try again sometime later").setData(e.getMessage());
+			return new ResponseEntity<Object>(e.getMessage(), new HttpHeaders(), 404);
 		}
 	}
 

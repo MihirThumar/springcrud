@@ -10,7 +10,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./update-customer.component.css']
 })
 export class UpdateCustomerComponent implements OnInit {
-  
+
   constructor(private customerService: CustomerService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -20,21 +20,21 @@ export class UpdateCustomerComponent implements OnInit {
     }, error => console.log(error));
 
     let today: any = new Date();
-    let day: string | number= today.getDate();
+    let day: string | number = today.getDate();
     let month: any = today.getMonth() + 1;
     let year: string | number = today.getFullYear();
 
-    if(day < 10){
+    if (day < 10) {
       day = '0' + day;
     }
-    if(month < 10) {
+    if (month < 10) {
       month = '0' + month;
-    }else{
-      month =  month ;
+    } else {
+      month = month;
     }
-    
+
     today = year + '-' + month + '-' + day;
-    document.getElementById('dateofbirth')?.setAttribute('max',today);
+    document.getElementById('dateofbirth')?.setAttribute('max', today);
     this.maxDate = today;
   }
 
@@ -45,32 +45,29 @@ export class UpdateCustomerComponent implements OnInit {
   maxDate: any = "2023-01-31";
   dateMssg: any = "";
   newDate: any;
-  m_Date: any;
   email_error_mssg: any;
   number_error_mssg: any;
 
   onUpdate() {
     this.email_error_mssg = "";
     this.number_error_mssg = "";
-    this.newDate = this.dateOfBirth?.value;
-    let now_Date = new Date();
-    let d_input = new Date(this.newDate);
-    this.m_Date = d_input.getFullYear();
 
+    this.newDate = this.dateOfBirth?.value;
+    let d_input: any = new Date(this.newDate);
 
     if (this.form.valid) {
       if (this.newDate <= this.maxDate) {
-        if (this.m_Date >= 1950) {
+        if (this.newDate >= '01-01-1950') {
           this.customerService.createCustomre(this.customer).subscribe(data => {
             console.log(data);
             this.router.navigate(['/customer']);
           },
             error => {
               console.log(error.error);
-              if(error.error == 'could not execute statement; SQL [n/a]; constraint [customer.UK_dwk6cx0afu8bs9o4t536v1j5v]'){
+              if (error.error == 'could not execute statement; SQL [n/a]; constraint [customer.UK_dwk6cx0afu8bs9o4t536v1j5v]') {
                 this.email_error_mssg = "This emial is already exist";
               }
-              if(error.error == 'could not execute statement; SQL [n/a]; constraint [customer.UK_5v8hijx47m783qo8i4sox2n5t]'){
+              if (error.error == 'could not execute statement; SQL [n/a]; constraint [customer.UK_5v8hijx47m783qo8i4sox2n5t]') {
                 this.number_error_mssg = 'This number is already exist';
               }
             });
@@ -85,17 +82,16 @@ export class UpdateCustomerComponent implements OnInit {
     }
   }
 
-
   form = new FormGroup({
     firstName: new FormControl('', [Validators.required]),
     lastName: new FormControl('', [Validators.required]),
     dateOfBirth: new FormControl('', [Validators.required]),
     mobileNumber: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(17)]),
-    addressOne: new FormControl('', [Validators.required]),
-    addressTwo: new FormControl('', [Validators.required]),
-    age: new FormControl('', [Validators.required, Validators.min(1), Validators.minLength(1), Validators.maxLength(11)]),
+    addressOne: new FormControl(''),
+    addressTwo: new FormControl(''),
+    age: new FormControl('', [Validators.required, Validators.min(1), Validators.max(150)]),
     gender: new FormControl('', Validators.required),
-    email: new FormControl('', [Validators.required, Validators.email])
+    email: new FormControl('', [Validators.required, Validators.pattern(/^\w+@[a-zA-Z0-9_]+?\.[a-zA-Z]{2,3}$/)])
   });
 
   get control() {
@@ -131,27 +127,37 @@ export class UpdateCustomerComponent implements OnInit {
 
   first_name_pattern: any = new RegExp(/^[a-zA-Z!@#$%\&*)(^+=._-\s]*[a-zA-Z]+$/);
   previous_pattern: any = "";
+
   first_func(e: any) {
     let first = this.firstName?.value;
-    if(this.first_name_pattern.test(first)){
+    if (this.first_name_pattern.test(first)) {
       this.previous_pattern = first;
     }
     e.target.value = this.previous_pattern;
   }
 
-  last_func(e:any) {
+  last_func(e: any) {
     let last = this.lastName?.value;
-    if(this.first_name_pattern.test(last)){
+    if (this.first_name_pattern.test(last)) {
       this.previous_pattern = last;
     }
     e.target.value = this.previous_pattern;
   }
 
   mobile_pattern: any = new RegExp(/^[0-9+\s]*$/);
-  mobile_func(e:any){
+  mobile_func(e: any) {
     let mobileValue = this.mobileNumber?.value;
-    if(this.mobile_pattern.test(mobileValue)){
+    if (this.mobile_pattern.test(mobileValue)) {
       this.previous_pattern = mobileValue;
+    }
+    e.target.value = this.previous_pattern;
+  }
+
+  age_pattern: any = new RegExp(/^[0-9]{0,3}$/)
+  age_func(e: any) {
+    let ageValue = this.age?.value;
+    if (this.age_pattern.test(ageValue)) {
+      this.previous_pattern = ageValue;
     }
     e.target.value = this.previous_pattern;
   }

@@ -1,17 +1,21 @@
 <div class="main_div">
   <div class="title">
-    <div class="cover_div"><h2>Customer List</h2></div>
-    <div class="add_btn" ><div routerLink="register" class="inner_add_btn">+</div></div>
+    <div class="cover_div">
+      <h2>Customer List</h2>
+    </div>
+    <div class="add_btn">
+      <div routerLink="register" class="inner_add_btn">+</div>
+    </div>
   </div>
   <table class="table">
     <thead>
-        <th hidden>id</th>
-        <th>Name</th>
-        <th>Date of Birth</th>
-        <th>Mobile Number</th>
-        <th>Address</th>
-        <th>Gender</th>
-        <th>Action</th>
+      <th hidden>id</th>
+      <th>Name</th>
+      <th>Date of Birth</th>
+      <th>Mobile Number</th>
+      <th>Address</th>
+      <th>Gender</th>
+      <th>Action</th>
     </thead>
     <tbody>
       <tr *ngFor="let customer of customers;">
@@ -22,9 +26,20 @@
         <td>{{customer.addressOne}} {{customer.addressTwo}}</td>
         <td>{{customer.gender}}</td>
         <td><button (click)="updateCustomer(customer.id)" class="edit btn"><i class="fa-solid fa-user-pen"></i></button>
-          <button class="delete btn" (click)="deleteCustomer(customer.id)"><i class="fa-sharp fa-solid fa-trash"></i></button></td>
+          <button class="delete btn" (click)="delete_popup($event,customer.id)"><i
+              class="fa-sharp fa-solid fa-trash"></i></button>
+        </td>
       </tr>
     </tbody>
   </table>
+</div>
+<div class="pop_up" #popup_mssg>
+  <div class="warning_div">
+    <div class="warning_title">Are you sure ?</div>
+    <div class="warning_btn">
+      <div class="btn_no" (click)="backToCustmer($event)">no</div>
+      <div class="btn_yes" (click)="delete_custmore($event)">Yes</div>
+    </div>
+  </div>
 </div>
 <router-outlet></router-outlet>

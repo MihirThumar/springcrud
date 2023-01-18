@@ -10,6 +10,7 @@
   top: 0;
   left: 0;
   background: rgba(0, 0, 0, 0.658);
+  font-family:   sans-serif;
 }
 
 .inner_box {
@@ -31,8 +32,9 @@
 .input_field input {
   padding: 0.5%;
   background: gainsboro;
-  font-size: 1vw;
+  font-size: 0.9vw;
   outline: none;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 .input_field input[type="radio"] {
@@ -40,7 +42,7 @@
 }
 
 .input_field input[type="date"] {
-  width: 141%;
+  width: 128%;
 }
 
 .input_field input[type="number"] {
@@ -52,12 +54,12 @@
 }
 
 .radio p:nth-child(2) {
-  margin-right: 19%;
+  margin-right: 16%;
 }
 
 .textarea {
   resize: none;
-  width: 140%;
+  width: 127%;
   outline: none;
   background: gainsboro;
 }
@@ -83,6 +85,7 @@
   margin: 0 0 2% 0;
   border: 1px solid darkred;
   border-radius: 6%;
+  cursor: pointer;
 }
 
 .cancel:hover {
@@ -99,15 +102,12 @@
   text-decoration: none;
   border-radius: 6%;
   border: 1px solid darkgreen;
+  cursor: pointer;
 }
 
 .submit:hover {
   background-color: lightgreen;
   color: darkblue;
-}
-
-.submit:disabled {
-  background-color: rgba(85, 107, 47, 0.541);
 }
 
 .danger {

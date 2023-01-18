@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { CustomerService } from '../customer.service';
 import { Customer } from '../customer';
@@ -31,7 +31,7 @@ export class CustomerListComponent {
           month = '0' + month;
         }
 
-        c.dateOfBirth = o_date.getDate() + '-' + month + '-' + o_date.getFullYear();
+        c.dateOfBirth = day + '-' + month + '-' + o_date.getFullYear();
       }
     });
   }
@@ -40,11 +40,29 @@ export class CustomerListComponent {
     this.router.navigate(['update-customer', id]);
   }
 
+  @ViewChild("popup_mssg") popup!: ElementRef;
+  delete_id!: number;
+
+  delete_popup(e: any, id: number) {
+    this.popup.nativeElement.style = 'display:flex';
+    this.delete_id = id;
+    console.log(id, this.delete_id);
+
+  }
+
+  backToCustmer(e: any) {
+    this.popup.nativeElement.style = 'display:none';
+  }
+
+  delete_custmore(e: any) {
+    this.deleteCustomer(this.delete_id);
+    this.popup.nativeElement.style = 'display:none';
+  }
+
   deleteCustomer(id: number) {
     this.custmoreService.deleteCustomer(id).subscribe(data => {
       console.log(data);
       this.getCustmores();
     })
   }
-
 }
