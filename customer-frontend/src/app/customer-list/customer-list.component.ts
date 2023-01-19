@@ -44,7 +44,9 @@ export class CustomerListComponent {
   delete_id!: number;
 
   delete_popup(e: any, id: number) {
-    this.popup.nativeElement.style = 'display:flex';
+    setTimeout(() => {
+      this.popup.nativeElement.style = 'display:flex';
+    }, 100);
     this.delete_id = id;
   }
 

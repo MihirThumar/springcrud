@@ -114,11 +114,14 @@
   position: absolute;
   top: 0;
   left: 0;
-  background: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);
+  background: rgba(0, 0, 0, 0.61);
+  /* background: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%); */
   display: none;
   flex-direction: column;
   align-items: center;
   font-family: fantasy;
+  transition: 1s;
+  
 }
 
 .warning_div {
@@ -127,8 +130,10 @@
   width: 35%;
   display: flex;
   flex-direction: column;
-  border: 1px solid darkslateblue;
-  margin-top: 2%;
+  border: 1px solid rgb(20, 20, 20);
+  margin-top: 0.5%;
+  background: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);
+  border-radius: 0.8%;
 }
 
 .warning_title {
