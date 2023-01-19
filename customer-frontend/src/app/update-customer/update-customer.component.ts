@@ -130,40 +130,32 @@ export class UpdateCustomerComponent implements OnInit {
   first_name_pattern: any = new RegExp(/^[a-zA-Z!@#$%\^&*)(+=._-]*$/);
   previous_pattern_first: any = "";
   first_func(e: any) {
-    let first = this.firstName?.value;
-    if (this.first_name_pattern.test(first)) {
-      this.previous_pattern_first = first;
+    let first = String.fromCharCode(e.which);
+    if(!this.first_name_pattern.test(first)){
+      e.preventDefault();
     }
-    e.target.value = this.previous_pattern_first;
   }
 
-  previous_pattern_last: any = "";
   last_func(e: any) {
-
-    let last = this.lastName?.value;
-    if (this.first_name_pattern.test(last)) {
-      this.previous_pattern_last = last;
+    let last = String.fromCharCode(e.which);
+    if(!this.first_name_pattern.test(last)){
+      e.preventDefault();
     }
-    e.target.value = this.previous_pattern_last;
   }
 
-  previous_pattern_number: any = "";
   mobile_pattern: any = new RegExp(/^[0-9+\s]*$/);
   mobile_func(e: any) {
-    let mobileValue = this.mobileNumber?.value;
-    if (this.mobile_pattern.test(mobileValue)) {
-      this.previous_pattern_number = mobileValue;
+    let number = String.fromCharCode(e.which);
+    if(!this.mobile_pattern.test(number)){
+      e.preventDefault();
     }
-    e.target.value = this.previous_pattern_number;
   }
 
-  previous_pattern_age: any = "";
   age_pattern: any = new RegExp(/^[0-9]{0,3}$/)
   age_func(e: any) {
-    let ageValue = this.age?.value;
-    if (this.age_pattern.test(ageValue)) {
-      this.previous_pattern_age = ageValue;
+    let age = String.fromCharCode(e.which);
+    if(!this.age_pattern.test(age)){
+      e.preventDefault();
     }
-    e.target.value = this.previous_pattern_age;
   }
 }

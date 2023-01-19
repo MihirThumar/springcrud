@@ -5,16 +5,18 @@
       <div class="input_field">
         <label for="firstname">First Name :</label>
         <input type="text" id="firstname" formControlName="firstName" [(ngModel)]="customer.firstName"
-          (input)="first_func($event)">
+          (keypress)="first_func($event)">
       </div>
-      <span *ngIf="firstName!.touched && firstName!.invalid" class="danger"> This field is necessary </span>
+      <div *ngIf="firstName!.errors?.['required'] && (firstName!.touched || firstName!.dirty)" class="danger"> First name is necessary </div>
+      <div *ngIf="firstName!.errors?.['maxlength'] && (firstName!.touched || firstName!.dirty)" class="danger"> First name is too long</div>
 
       <div class="input_field">
         <label for="lastname">Last Name :</label>
         <input type="text" id="lastname" formControlName="lastName" [(ngModel)]="customer.lastName"
-          (input)="last_func($event)">
+          (keypress)="last_func($event)">
       </div>
-      <span *ngIf="lastName!.touched && lastName!.invalid" class="danger"> This field is necessary </span>
+      <div *ngIf="lastName!.errors?.['required'] && (lastName!.touched || lastName!.dirty)" class="danger"> Last name is necessary </div>
+      <div *ngIf="lastName!.errors?.['maxlength'] && (lastName!.touched || lastName!.dirty)" class="danger"> Last name is too long</div>
 
       <div class="input_field">
         <label for="dateofbirth">Date Of Birth :</label>
@@ -50,7 +52,7 @@
 
       <div class="input_field">
         <label for="age">Age :</label>
-        <input type="text" id="age" formControlName="age" [(ngModel)]="customer.age" (input)="age_func($event)">
+        <input type="text" id="age" formControlName="age" [(ngModel)]="customer.age" (keypress)="age_func($event)">
       </div>
       <span *ngIf="age && age.errors?.['required'] && (age.touched || age.dirty)" class="danger">
         This field is necessary

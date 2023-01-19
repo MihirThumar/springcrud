@@ -5,14 +5,14 @@
       <div class="input_field">
         <label for="firstname">First Name :</label>
         <input type="text" id="firstname" formControlName="firstName" [(ngModel)]="customer.firstName"
-          (input)="first_func($event)">
+          (keypress)="first_func($event)">
       </div>
       <span *ngIf="firstName!.touched && firstName!.invalid" class="danger"> This field is necessary </span>
 
       <div class="input_field">
         <label for="lastname">Last Name :</label>
         <input type="text" id="lastname" formControlName="lastName" [(ngModel)]="customer.lastName"
-          (input)="last_func($event)">
+          (keypress)="last_func($event)">
       </div>
       <span *ngIf="lastName!.touched && lastName!.invalid" class="danger"> This field is necessary </span>
 
@@ -27,7 +27,7 @@
       <div class="input_field">
         <label for="mobile">Mobile :</label>
         <input type="text" id="mobile" formControlName="mobileNumber" [(ngModel)]="customer.mobileNumber"
-          (input)="mobile_func($event)">
+          (keypress)="mobile_func($event)">
         </div>
         <span *ngIf="mobileNumber && mobileNumber.errors?.['required'] && (mobileNumber.touched || mobileNumber.dirty)" class="danger">
           This field is necessary
@@ -50,7 +50,7 @@
 
       <div class="input_field">
         <label for="age">Age :</label>
-        <input type="text" id="age" formControlName="age" [(ngModel)]="customer.age" (input)="age_func($event)">
+        <input type="text" id="age" formControlName="age" [(ngModel)]="customer.age" (keypress)="age_func($event)">
       </div>
       <span *ngIf="age && age.errors?.['required'] && (age.touched || age.dirty)" class="danger">
         This field is necessary

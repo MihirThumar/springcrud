@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Customer } from '../customer';
 import { CustomerService } from '../customer.service';
-import { Router,ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 // import { CustomerListComponent } from '../customer-list/customer-list.component';
 
@@ -64,17 +64,17 @@ export class CreatCustomerComponent implements OnInit {
             console.log(data);
             this.router.navigate(['/customer']);
           },
-          error => {
-            console.log(error.error);
-            if (error.error == 'could not execute statement; SQL [n/a]; constraint [customer.UK_dwk6cx0afu8bs9o4t536v1j5v]') {
-              this.form.controls['email'].setErrors({'incorrect': true});
-              this.email_error_mssg = "This emial is already exist";
-            }
-            if (error.error == 'could not execute statement; SQL [n/a]; constraint [customer.UK_5v8hijx47m783qo8i4sox2n5t]') {
-              this.form.controls['mobileNumber'].setErrors({'incorrect': true});
-              this.number_error_mssg = 'This number is already exist';
-            }
-          });
+            error => {
+              console.log(error.error);
+              if (error.error == 'could not execute statement; SQL [n/a]; constraint [customer.UK_dwk6cx0afu8bs9o4t536v1j5v]') {
+                this.form.controls['email'].setErrors({ 'incorrect': true });
+                this.email_error_mssg = "This emial is already exist";
+              }
+              if (error.error == 'could not execute statement; SQL [n/a]; constraint [customer.UK_5v8hijx47m783qo8i4sox2n5t]') {
+                this.form.controls['mobileNumber'].setErrors({ 'incorrect': true });
+                this.number_error_mssg = 'This number is already exist';
+              }
+            });
         } else {
           this.dateMssg = "Below 1950 date is not allowed";
         }
@@ -87,8 +87,8 @@ export class CreatCustomerComponent implements OnInit {
   }
 
   form = new FormGroup({
-    firstName: new FormControl('', [Validators.required]),
-    lastName: new FormControl('', [Validators.required]),
+    firstName: new FormControl('', [Validators.required, Validators.maxLength(30)]),
+    lastName: new FormControl('', [Validators.required, Validators.maxLength(30)]),
     dateOfBirth: new FormControl(new Date(), [Validators.required]),
     mobileNumber: new FormControl('', [Validators.required, Validators.min(1), Validators.max(99999999999999999)]),
     addressOne: new FormControl(''),
@@ -132,41 +132,38 @@ export class CreatCustomerComponent implements OnInit {
   first_name_pattern: any = new RegExp(/^[a-zA-Z!@#$%\^&*)(+=._-]*$/);
   previous_pattern_first: any = "";
   first_func(e: any) {
-    let first = this.firstName?.value;
-    if (this.first_name_pattern.test(first)) {
-      this.previous_pattern_first = first;
+    console.log(window.onload);
+    
+    window.onload = () => {
+      e.target.value.onPaste = (eve: { preventDefault: () => any; }) => eve.preventDefault();
     }
-    e.target.value = this.previous_pattern_first;
+    let first = String.fromCharCode(e.which);
+    if (!this.first_name_pattern.test(first)) {
+      e.preventDefault();
+    }
   }
 
-  previous_pattern_last: any = "";
   last_func(e: any) {
-    let last = this.lastName?.value;
-    if (this.first_name_pattern.test(last)) {
-      this.previous_pattern_last = last;
+    let last = String.fromCharCode(e.which);
+    if (!this.first_name_pattern.test(last)) {
+      e.preventDefault();
     }
-    e.target.value = this.previous_pattern_last;
   }
 
-  previous_pattern_number: any = isNaN;
   mobile_pattern: any = new RegExp(/^[0-9+\s]*$/);
   mobile_func(e: any) {
-    this.previous_pattern_number.trim();
-    let mobileValue = this.mobileNumber?.value;
-    if (this.mobile_pattern.match(mobileValue)) {
-      this.previous_pattern_number = mobileValue;
+    let number = String.fromCharCode(e.which);
+    if (!this.mobile_pattern.test(number)) {
+      e.preventDefault();
     }
-    e.target.value = this.previous_pattern_number;
   }
 
-  previous_pattern_age: any = "";
   age_pattern: any = new RegExp(/^[0-9]{0,3}$/)
   age_func(e: any) {
-    let ageValue = this.age?.value;
-    if (this.age_pattern.test(ageValue)) {
-      this.previous_pattern_age = ageValue;
+    let age = String.fromCharCode(e.which);
+    if (!this.age_pattern.test(age)) {
+      e.preventDefault();
     }
-    e.target.value = this.previous_pattern_age;
   }
 
 }
