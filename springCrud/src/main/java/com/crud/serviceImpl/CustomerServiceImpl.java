@@ -35,8 +35,8 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public Object getCustomer() {
 		try {
-			List<Customer> findAll = customerRepository.findAll();
-			return findAll;
+			 List<Customer> findAllByDescId = customerRepository.findAllByOrderByIdDesc();
+			return findAllByDescId;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<Object>(e.getMessage(), new HttpHeaders(), 404);

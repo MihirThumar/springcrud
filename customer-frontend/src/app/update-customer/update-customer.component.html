@@ -7,79 +7,80 @@
         <input type="text" id="firstname" formControlName="firstName" [(ngModel)]="customer.firstName"
           (input)="first_func($event)">
       </div>
-      <span *ngIf="firstName && firstName.touched && firstName.invalid" class="danger"> This Field is Not valid </span>
+      <span *ngIf="firstName!.touched && firstName!.invalid" class="danger"> This field is necessary </span>
 
       <div class="input_field">
         <label for="lastname">Last Name :</label>
         <input type="text" id="lastname" formControlName="lastName" [(ngModel)]="customer.lastName"
           (input)="last_func($event)">
       </div>
-      <span *ngIf="lastName && lastName.touched && lastName.invalid" class="danger"> This Field is Not valid </span>
+      <span *ngIf="lastName!.touched && lastName!.invalid" class="danger"> This field is necessary </span>
 
       <div class="input_field">
         <label for="dateofbirth">Date Of Birth :</label>
         <input type="date" id="dateofbirth" formControlName="dateOfBirth" [(ngModel)]="customer.dateOfBirth"
           min="{{minDate}}" max="{{maxDate}}">
       </div>
+      <span *ngIf="dateOfBirth && dateOfBirth.errors?.['required'] && dateOfBirth.touched" class="danger">Date is necessary </span>
       <span class="danger">{{dateMssg}}</span>
-      <span *ngIf="dateOfBirth && dateOfBirth.touched && dateOfBirth.invalid" class="danger"> Date is Not valid </span>
 
       <div class="input_field">
         <label for="mobile">Mobile :</label>
         <input type="text" id="mobile" formControlName="mobileNumber" [(ngModel)]="customer.mobileNumber"
           (input)="mobile_func($event)">
-      </div>
-      <span class="danger">{{number_error_mssg}}</span>
-      <span *ngIf="mobileNumber && mobileNumber.touched && mobileNumber.invalid" class="danger">Number is Not
-        valid</span>
+        </div>
+        <span *ngIf="mobileNumber && mobileNumber.errors?.['required'] && (mobileNumber.touched || mobileNumber.dirty)" class="danger">
+          This field is necessary
+        </span>
+        <span *ngIf="mobileNumber  && (mobileNumber.errors?.['min'] || mobileNumber.errors?.['max'] )" class="danger">Number must be in to 10 to 17</span>
+        <span *ngIf="mobileNumber && mobileNumber.errors?.['incorrect']" class="danger">This number is already exist'</span>
+
 
       <div class="input_field">
         <label for="address-1">Address 1 :</label>
-        <!-- < input type="text" id="address-1" formControlName="addressOne" [(ngModel)]="customer.addressOne"> -->
         <textarea class="textarea" id="address-1" formControlName="addressOne"
           [(ngModel)]="customer.addressOne"></textarea>
       </div>
-      <span *ngIf="addressOne && addressOne.touched && addressOne.invalid" class="danger">Address is Not valid </span>
 
       <div class="input_field">
         <label for="address-2">Address 2 :</label>
         <textarea id="address-2" formControlName="addressTwo" [(ngModel)]="customer.addressTwo"
           class="textarea"></textarea>
-        <!-- <input type="text" id="address-2" formControlName="addressTwo" [(ngModel)]="customer.addressTwo"> -->
       </div>
-      <span *ngIf="addressTwo && addressTwo.touched && addressTwo.invalid" class="danger">Address is Not valid </span>
 
       <div class="input_field">
         <label for="age">Age :</label>
-        <input type="number" id="age" formControlName="age" [(ngModel)]="customer.age">
+        <input type="text" id="age" formControlName="age" [(ngModel)]="customer.age" (input)="age_func($event)">
       </div>
-      <span *ngIf="age && age.touched && age.invalid" class="danger">Age is Not valid </span>
+      <span *ngIf="age && age.errors?.['required'] && (age.touched || age.dirty)" class="danger">
+        This field is necessary
+      </span>
+      <span *ngIf="age  && (age.errors?.['min'] || age.errors?.['max'] )" class="danger">Age must be in to 18 to 150</span>
 
       <div class="input_field radio">
-        <p><label for="gender">Gender :</label></p>
-        <p>
-          <input type="radio" id="male" formControlName="gender" [(ngModel)]="customer.gender" value="male"
-            name="gender">
+        <div><label for="gender">Gender :</label></div>
+        <div class="sub_gender">
+          <input type="radio" id="male" formControlName="gender" [(ngModel)]="customer.gender" value="male" name="gender">
           <label for="male">Male </label>
-          <input type="radio" id="female" formControlName="gender" [(ngModel)]="customer.gender" value="female"
-            name="gender">
+          <input type="radio" id="female" formControlName="gender" [(ngModel)]="customer.gender" value="female" name="gender">
           <label for="female">Female</label>
-        </p>
+        </div>
       </div>
-      <span class="danger" *ngIf="gender?.touched && gender?.invalid"></span>
+      <span style="margin : 0 0 0 46%;" class="danger" *ngIf="gender &&  gender.invalid">This field is necessary</span>
 
       <div class="input_field">
         <label for="email">Email :</label>
-        <input type="email" id="emial" formControlName="email" [(ngModel)]="customer.email">
+        <input type="text" id="emial" formControlName="email" [(ngModel)]="customer.email">
       </div>
-      <span class="danger">{{email_error_mssg}}</span>
-      <span *ngIf="email && email.touched && email.invalid" class="danger">Email is Not valid </span>
+      <span *ngIf="email && email.errors?.['required'] && email.touched " class="danger">Email is required</span>
+      <span *ngIf="email && email.invalid && email.touched" class="danger">Email is not valid</span>
+      <span *ngIf="email && email.errors?.['incorrect']" class="danger">This emial is already exist</span>
 
       <div class="btn_class">
         <div class="cancel_div"><button routerLink="" class="cancel">Cancel</button></div>
         <div class="save_div"><button class="submit" #submit>Save</button></div>
       </div>
-      <span class="danger" style="margin: 2% 0 0 13%;">{{mssg}}</span>
+      <span class="danger" style="margin: 2% 0 0 23%;">{{mssg}}</span>
     </div>
   </div>
 </form>

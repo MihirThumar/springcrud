@@ -1,5 +1,5 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CustomerService } from '../customer.service';
 import { Customer } from '../customer';
 
@@ -23,14 +23,12 @@ export class CustomerListComponent {
         let o_date = new Date(c.dateOfBirth);
         let day: any = o_date.getDate();
         let month: any = o_date.getMonth() + 1;
-
         if (day < 10) {
           day = '0' + day;
         }
         if (month < 10) {
           month = '0' + month;
         }
-
         c.dateOfBirth = day + '-' + month + '-' + o_date.getFullYear();
       }
     });

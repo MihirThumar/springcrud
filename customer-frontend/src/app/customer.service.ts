@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Customer } from './customer';
 
 
@@ -8,6 +8,15 @@ import { Customer } from './customer';
   providedIn: 'root'
 })
 export class CustomerService {
+
+  // private subject = new Subject<any>();
+
+  // sendClickEvent(){
+  //   this.subject.next();
+  // }
+  // getClickEvent(): Observable<any> {
+  //   return this.subject.asObservable();
+  // }
 
   private url = {
     getData: "http://localhost:8080/view-customer",

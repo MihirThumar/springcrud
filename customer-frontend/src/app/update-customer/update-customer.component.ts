@@ -65,9 +65,11 @@ export class UpdateCustomerComponent implements OnInit {
             error => {
               console.log(error.error);
               if (error.error == 'could not execute statement; SQL [n/a]; constraint [customer.UK_dwk6cx0afu8bs9o4t536v1j5v]') {
+                this.form.controls['email'].setErrors({'incorrect': true});
                 this.email_error_mssg = "This emial is already exist";
               }
               if (error.error == 'could not execute statement; SQL [n/a]; constraint [customer.UK_5v8hijx47m783qo8i4sox2n5t]') {
+                this.form.controls['mobileNumber'].setErrors({'incorrect': true});
                 this.number_error_mssg = 'This number is already exist';
               }
             });
@@ -85,12 +87,12 @@ export class UpdateCustomerComponent implements OnInit {
   form = new FormGroup({
     firstName: new FormControl('', [Validators.required]),
     lastName: new FormControl('', [Validators.required]),
-    dateOfBirth: new FormControl('', [Validators.required]),
-    mobileNumber: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(17)]),
+    dateOfBirth: new FormControl(new Date(), [Validators.required]),
+    mobileNumber: new FormControl('', [Validators.required, Validators.min(1), Validators.max(99999999999999999)]),
     addressOne: new FormControl(''),
     addressTwo: new FormControl(''),
-    age: new FormControl('', [Validators.required, Validators.min(1), Validators.max(150)]),
-    gender: new FormControl('', Validators.required),
+    age: new FormControl('', [Validators.required, Validators.min(18), Validators.max(150)]),
+    gender: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.pattern(/^\w+@[a-zA-Z0-9_]+?\.[a-zA-Z]{2,3}$/)])
   });
 
@@ -121,44 +123,47 @@ export class UpdateCustomerComponent implements OnInit {
   get gender() {
     return this.form.get('gender');
   }
-  get email() {
+  get email(): any {
     return this.form.get('email');
   }
 
-  first_name_pattern: any = new RegExp(/^[a-zA-Z!@#$%\&*)(^+=._-\s]*[a-zA-Z]+$/);
-  previous_pattern: any = "";
-
+  first_name_pattern: any = new RegExp(/^[a-zA-Z!@#$%\^&*)(+=._-]*$/);
+  previous_pattern_first: any = "";
   first_func(e: any) {
     let first = this.firstName?.value;
     if (this.first_name_pattern.test(first)) {
-      this.previous_pattern = first;
+      this.previous_pattern_first = first;
     }
-    e.target.value = this.previous_pattern;
+    e.target.value = this.previous_pattern_first;
   }
 
+  previous_pattern_last: any = "";
   last_func(e: any) {
+
     let last = this.lastName?.value;
     if (this.first_name_pattern.test(last)) {
-      this.previous_pattern = last;
+      this.previous_pattern_last = last;
     }
-    e.target.value = this.previous_pattern;
+    e.target.value = this.previous_pattern_last;
   }
 
+  previous_pattern_number: any = "";
   mobile_pattern: any = new RegExp(/^[0-9+\s]*$/);
   mobile_func(e: any) {
     let mobileValue = this.mobileNumber?.value;
     if (this.mobile_pattern.test(mobileValue)) {
-      this.previous_pattern = mobileValue;
+      this.previous_pattern_number = mobileValue;
     }
-    e.target.value = this.previous_pattern;
+    e.target.value = this.previous_pattern_number;
   }
 
+  previous_pattern_age: any = "";
   age_pattern: any = new RegExp(/^[0-9]{0,3}$/)
   age_func(e: any) {
     let ageValue = this.age?.value;
     if (this.age_pattern.test(ageValue)) {
-      this.previous_pattern = ageValue;
+      this.previous_pattern_age = ageValue;
     }
-    e.target.value = this.previous_pattern;
+    e.target.value = this.previous_pattern_age;
   }
 }

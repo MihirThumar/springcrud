@@ -30,6 +30,7 @@
 }
 
 .input_field input {
+  width: 28vw;
   padding: 0.5%;
   background: gainsboro;
   font-size: 0.9vw;
@@ -42,24 +43,16 @@
 }
 
 .input_field input[type="date"] {
-  width: 128%;
+  width: 28vw;
 }
 
-.input_field input[type="number"] {
-  width: 125%;
-}
-
-.radio {
-  justify-content: space-between;
-}
-
-.radio p:nth-child(2) {
-  margin-right: 16%;
+.sub_gender{
+  margin: 0 0 0 22%;
 }
 
 .textarea {
   resize: none;
-  width: 127%;
+  width: 28vw;
   outline: none;
   background: gainsboro;
   font-size: 0.9vw;
@@ -114,7 +107,7 @@
 .danger {
   color: rgb(255, 104, 104);
   display: block;
-  margin-left: 50%;
+  margin-left: 46%;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: small;
 }
