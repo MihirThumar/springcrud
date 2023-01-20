@@ -42,7 +42,7 @@ export class CustomerListComponent {
 
   delete_id!: number;
 
-  delete_popup(e: any, id: number) {
+  delete_popup(id: number) {
     setTimeout(() => {
       this.popup.nativeElement.style = 'display:flex';
     }, 100);
