@@ -35,10 +35,11 @@ export class CustomerListComponent {
   }
 
   updateCustomer(id: number) {
-    this.router.navigate(['update-customer', id]);
+    this.router.navigate(['customer/register', id]);
   }
 
   @ViewChild("popup_mssg") popup!: ElementRef;
+
   delete_id!: number;
 
   delete_popup(e: any, id: number) {

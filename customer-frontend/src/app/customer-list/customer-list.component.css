@@ -61,7 +61,7 @@
 
 .table td {
   padding: 1% 0 1% 1%;
-  /* border: 1px solid gainsboro; */
+  border: 1px solid rgb(66, 80, 2);
 }
 
 .table tr:nth-child(even) {
@@ -115,13 +115,12 @@
   top: 0;
   left: 0;
   background: rgba(0, 0, 0, 0.61);
-  /* background: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%); */
   display: none;
   flex-direction: column;
   align-items: center;
   font-family: fantasy;
   transition: 1s;
-  
+
 }
 
 .warning_div {

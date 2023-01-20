@@ -9,8 +9,17 @@
   position: absolute;
   top: 0;
   left: 0;
-  background: rgba(0, 0, 0, 0.658);
-  font-family:   sans-serif;
+  background: rgba(0, 0, 0, 0.13);
+  font-family: sans-serif;
+}
+
+.heading {
+  color:white;
+  display: flex;
+  justify-content: center;
+  margin-top: 3vw;
+  font-size: 2vw;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .inner_box {
@@ -46,7 +55,7 @@
   width: 28vw;
 }
 
-.sub_gender{
+.sub_gender {
   margin: 0 0 0 22%;
 }
 

@@ -1,4 +1,8 @@
-<form (ngSubmit)="onSubmit()" [formGroup]="form">
+<form (ngSubmit)="onSubmit_func($event)" [formGroup]="form" autocomplete="off">
+  <div class="heading">
+    <span *ngIf="id"> Edit Customer</span>
+    <span *ngIf="!id"> Create Customer</span>
+   </div>
   <div class="customer_registration_container">
     <div class="inner_box">
 
@@ -8,7 +12,7 @@
           (keypress)="first_func($event)">
       </div>
       <div *ngIf="firstName!.errors?.['required'] && (firstName!.touched || firstName!.dirty)" class="danger"> First name is necessary </div>
-      <div *ngIf="firstName!.errors?.['maxlength'] && (firstName!.touched || firstName!.dirty)" class="danger"> First name is too long</div>
+      <div *ngIf="firstName!.errors?.['minlength'] && (firstName!.touched || firstName!.dirty)" class="danger"> First name is too short</div>
 
       <div class="input_field">
         <label for="lastname">Last Name :</label>
@@ -16,26 +20,25 @@
           (keypress)="last_func($event)">
       </div>
       <div *ngIf="lastName!.errors?.['required'] && (lastName!.touched || lastName!.dirty)" class="danger"> Last name is necessary </div>
-      <div *ngIf="lastName!.errors?.['maxlength'] && (lastName!.touched || lastName!.dirty)" class="danger"> Last name is too long</div>
+      <div *ngIf="lastName!.errors?.['minlength'] && (lastName!.touched || lastName!.dirty)" class="danger"> Last name is too short</div>
 
       <div class="input_field">
         <label for="dateofbirth">Date Of Birth :</label>
         <input type="date" id="dateofbirth" formControlName="dateOfBirth" [(ngModel)]="customer.dateOfBirth"
           min="{{minDate}}" max="{{maxDate}}">
       </div>
-      <span *ngIf="dateOfBirth && dateOfBirth.errors?.['required'] && dateOfBirth.touched" class="danger">Date is necessary </span>
-      <span class="danger">{{dateMssg}}</span>
+      <span *ngIf="dateOfBirth && dateOfBirth.errors?.['required'] && (dateOfBirth.touched || dateOfBirth.dirty)" class="danger">Date is necessary </span>
+      <span class="danger" *ngIf="dateOfBirth && dateOfBirth.errors?.['future'] && dateOfBirth.dirty">Future date is not allowed</span>
+      <span class="danger" *ngIf="dateOfBirth && dateOfBirth.errors?.['past'] && dateOfBirth.dirty">Below 1950 date is not allowed</span>
 
       <div class="input_field">
         <label for="mobile">Mobile :</label>
         <input type="text" id="mobile" formControlName="mobileNumber" [(ngModel)]="customer.mobileNumber"
-        (keypress)="mobile_func($event)">
+        (keypress)="mobile_func($event)" (copy)="$event.preventDefault()" (paste)="$event.preventDefault()">
         </div>
-        <span *ngIf="mobileNumber && mobileNumber.errors?.['required'] && (mobileNumber.touched || mobileNumber.dirty)" class="danger">
-          This field is necessary
-        </span>
-        <span *ngIf="mobileNumber  && (mobileNumber.errors?.['min'] || mobileNumber.errors?.['max'] )" class="danger">Number must be in to 10 to 17</span>
-        <span *ngIf="mobileNumber && mobileNumber.errors?.['incorrect']" class="danger">This number is already exist'</span>
+        <span *ngIf="mobileNumber && mobileNumber.errors?.['required'] && (mobileNumber.touched || mobileNumber.dirty)" class="danger">This field is necessary</span>
+        <span *ngIf="mobileNumber && mobileNumber.errors?.['minlength'] && (mobileNumber.touched || mobileNumber.dirty)" class="danger">Number must be minimum 10</span>
+        <span *ngIf="mobileNumber && mobileNumber.errors?.['incorrect']" class="danger">This number is already exist</span>
 
 
       <div class="input_field">
@@ -52,12 +55,12 @@
 
       <div class="input_field">
         <label for="age">Age :</label>
-        <input type="text" id="age" formControlName="age" [(ngModel)]="customer.age" (keypress)="age_func($event)">
+        <input type="text" id="age" formControlName="age" [(ngModel)]="customer.age" (keypress)="age_func($event)" (copy)="$event.preventDefault()" (paste)="$event.preventDefault()">
       </div>
       <span *ngIf="age && age.errors?.['required'] && (age.touched || age.dirty)" class="danger">
         This field is necessary
       </span>
-      <span *ngIf="age  && (age.errors?.['min'] || age.errors?.['max'] )" class="danger">Age must be in to 18 to 150</span>
+      <span *ngIf="age  && (age.errors?.['min'] || age.errors?.['max'] )" class="danger">Age must be in to 18 to 100</span>
 
       <div class="input_field radio">
         <div><label for="gender">Gender :</label></div>
@@ -74,15 +77,18 @@
         <label for="email">Email :</label>
         <input type="text" id="emial" formControlName="email" [(ngModel)]="customer.email">
       </div>
-      <span *ngIf="email && email.errors?.['required'] && email.touched " class="danger">Email is required</span>
-      <span *ngIf="email && email.invalid && email.touched" class="danger">Email is not valid</span>
+      <span *ngIf="email && email.errors?.['required'] && (email.touched || email.dirty)" class="danger">Email is required</span>
+      <span *ngIf="email && email.errors?.['pattern'] && (email.touched || email.dirty)" class="danger">Email is not valid</span>
       <span *ngIf="email && email.errors?.['incorrect']" class="danger">This emial is already exist</span>
 
       <div class="btn_class">
         <div class="cancel_div"><button routerLink="" class="cancel">Cancel</button></div>
-        <div class="save_div"><button class="submit" #submit>Submit</button></div>
+        <div class="save_div"><button class="submit" #submit>
+          <span *ngIf="id" class="save_btn_form">Save</span>
+          <span *ngIf="!id" class="submit_btn_form">Submit</span>
+        </button></div>
       </div>
-      <span class="danger" style="margin: 2% 0 0 13%;">{{mssg}}</span>
+      <span class="danger" style="margin: 2% 0 0 24%;" *ngIf="form && form.errors?.['incoorect']">Please fill all data with valid information.</span>
     </div>
   </div>
 </form>

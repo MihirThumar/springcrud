@@ -34,10 +34,10 @@ public class Customer {
 	@Size(min = 10, max = 17)
 	private String mobileNumber;
 
-	@Column(length = 255)
+	@Column(length = 255,columnDefinition = "TEXT")
 	private String addressOne;
 
-	@Column(length = 255)
+	@Column(length = 255,columnDefinition = "TEXT")
 	private String addressTwo;
 
 	@Column(columnDefinition = "SMALLINT", nullable = false)

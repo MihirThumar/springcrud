@@ -45,7 +45,7 @@ export class CustomerService {
   }
 
   deleteCustomer(id: number): Observable<Object>{
-    return this.httpclient.delete(`${this.url.delete}/${id }`)
+    return this.httpclient.delete(`${this.url.delete}/${id}`)
   }
 
 }
