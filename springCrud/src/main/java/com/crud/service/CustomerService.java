@@ -15,8 +15,8 @@ public interface CustomerService {
 
 	// updating customer
 	public Object updateCustomer(Customer customer, int id);
-
+	
 	// deleting customer
-	public Object deleteCustomer(Integer id);
+	public 	Object deleteCustomer(Integer id);
 
 }
