@@ -26,12 +26,10 @@ export class CreatCustomerComponent implements OnInit {
         this.customer = data;
       }, error => console.log(error));
     }
-
     let today: any = new Date();
     let day: string | number = today.getDate();
     let month: any = today.getMonth() + 1;
     let year: string | number = today.getFullYear();
-
     if (day < 10) {
       day = '0' + day;
     }
@@ -65,7 +63,7 @@ export class CreatCustomerComponent implements OnInit {
 
     if (this.form.invalid) {
       this.mssg = 'Please fill all fields with valid information'
-      this.form.setErrors({'incoorect': true});
+      this.form.setErrors({ 'incoorect': true });
     } else {
       if (this.newDate <= this.maxDate) {
         if (d_input.getFullYear() >= 1950) {
@@ -94,7 +92,6 @@ export class CreatCustomerComponent implements OnInit {
   onUpdate() {
     this.newDate = this.dateOfBirth?.value;
     let d_input: any = new Date(this.newDate);
-
     if (this.newDate <= this.maxDate) {
       if (d_input.getFullYear() >= 1950) {
         this.customerService.updateCustomer(this.id, this.customer).subscribe(data => {
@@ -162,11 +159,12 @@ export class CreatCustomerComponent implements OnInit {
   }
 
   first_name_pattern: any = new RegExp(/^[a-zA-Z!@#$%\^&*)(+=._-]*$/);
+
   first_func(e: any) {
     let first = String.fromCharCode(e.which);
     if (!this.first_name_pattern.test(first)) {
       e.preventDefault();
-    }else if(e.target.value.length >= 30) {
+    } else if (e.target.value.length >= 30) {
       e.target.preventDefault();
     }
   }
@@ -175,7 +173,7 @@ export class CreatCustomerComponent implements OnInit {
     let last = String.fromCharCode(e.which);
     if (!this.first_name_pattern.test(last)) {
       e.preventDefault();
-    } else if(e.target.value.length >= 30) {
+    } else if (e.target.value.length >= 30) {
       e.target.preventDefault();
     }
   }
@@ -194,12 +192,10 @@ export class CreatCustomerComponent implements OnInit {
   age_pattern: any = new RegExp(/^[0-9]{0,3}$/)
   age_func(e: any): any {
     let age = String.fromCharCode(e.which);
-
     if (!this.age_pattern.test(age)) {
       return false;
     } else if (e.target.value.length >= 3) {
       e.target.preventDefault();
     }
   }
-
 }
