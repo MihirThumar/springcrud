@@ -19,8 +19,9 @@ export class CreatCustomerComponent implements OnInit {
   constructor(private customerService: CustomerService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.customer.gender = 'male';
     this.id = this.route.snapshot.params['id'];
-    if (this.id != undefined) {
+    if (this.id != null) {
       console.log(this.id);
       this.customerService.getCustomerById(this.id).subscribe(data => {
         this.customer = data;
@@ -49,18 +50,19 @@ export class CreatCustomerComponent implements OnInit {
   newDate: any;
   gender_mssg: any;
 
+  // select the customer is new or old
   onSubmit_func(e: any) {
-    if (this.id == undefined) {
+    if (this.id == null) {
       this.onSubmit();
     } else {
       this.onUpdate();
     }
   }
 
+  // create customer
   onSubmit() {
     this.newDate = this.dateOfBirth?.value;
     let d_input: any = new Date(this.newDate);
-
     if (this.form.invalid) {
       this.mssg = 'Please fill all fields with valid information'
       this.form.setErrors({ 'incoorect': true });
@@ -89,35 +91,40 @@ export class CreatCustomerComponent implements OnInit {
     }
   }
 
+  // edit customer
   onUpdate() {
     this.newDate = this.dateOfBirth?.value;
     let d_input: any = new Date(this.newDate);
-    if (this.newDate <= this.maxDate) {
-      if (d_input.getFullYear() >= 1950) {
-        this.customerService.updateCustomer(this.id, this.customer).subscribe(data => {
-          console.log(data);
-          this.router.navigate(['/customer']);
-        },
-          error => {
-            console.log(error.error);
-            if (error.error == 'could not execute statement; SQL [n/a]; constraint [customer.UK_dwk6cx0afu8bs9o4t536v1j5v]') {
-              this.email?.setErrors({ 'incorrect': true });
-            }
-            if (error.error == 'could not execute statement; SQL [n/a]; constraint [customer.UK_5v8hijx47m783qo8i4sox2n5t]') {
-              this.mobileNumber?.setErrors({ 'incorrect': true });
-            }
-          });
-      } else {
-        this.dateOfBirth?.setErrors({ 'past': true });
-      }
+    if (this.form.invalid) {
+      this.mssg = 'Please fill all fields with valid information'
+      this.form.setErrors({ 'incoorect': true });
     } else {
-      this.dateOfBirth?.setErrors({ 'future': true });
+      if (this.newDate <= this.maxDate) {
+        if (d_input.getFullYear() >= 1950) {
+          this.customerService.updateCustomer(this.id,this.customer).subscribe(data => {
+            this.router.navigate(['/customer']);
+          },
+            error => {
+              console.log(error.error);
+              if (error.error == 'could not execute statement; SQL [n/a]; constraint [customer.UK_dwk6cx0afu8bs9o4t536v1j5v]') {
+                this.email?.setErrors({ 'incorrect': true });
+              }
+              if (error.error == 'could not execute statement; SQL [n/a]; constraint [customer.UK_5v8hijx47m783qo8i4sox2n5t]') {
+                this.mobileNumber?.setErrors({ 'incorrect': true });
+              }
+            });
+        } else {
+          this.dateOfBirth?.setErrors({ 'past': true });
+        }
+      } else {
+        this.dateOfBirth?.setErrors({ 'future': true });
+      }
     }
   }
 
   form = new FormGroup({
-    firstName: new FormControl('', [Validators.required, Validators.minLength(3)]),
-    lastName: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    firstName: new FormControl('', [Validators.required, Validators.minLength(2), Validators.pattern(/^[a-zA-Z!@#$%\^&*)(+=._-]*$/)]),
+    lastName: new FormControl('', [Validators.required, Validators.minLength(2), Validators.pattern(/^[a-zA-Z!@#$%\^&*)(+=._-]*$/)]),
     dateOfBirth: new FormControl(new Date(), [Validators.required]),
     mobileNumber: new FormControl('', [Validators.required, Validators.minLength(10)]),
     addressOne: new FormControl(''),
@@ -158,37 +165,32 @@ export class CreatCustomerComponent implements OnInit {
     return this.form.get('email');
   }
 
-  first_name_pattern: any = new RegExp(/^[a-zA-Z!@#$%\^&*)(+=._-]*$/);
-
+  // validate firstname to accept only 30 letters
   first_func(e: any) {
-    let first = String.fromCharCode(e.which);
-    if (!this.first_name_pattern.test(first)) {
-      e.preventDefault();
-    } else if (e.target.value.length >= 30) {
+     if (e.target.value.length >= 30) {
       e.target.preventDefault();
     }
   }
 
+  // validate lastname to accept only 30 letters
   last_func(e: any) {
-    let last = String.fromCharCode(e.which);
-    if (!this.first_name_pattern.test(last)) {
-      e.preventDefault();
-    } else if (e.target.value.length >= 30) {
+   if (e.target.value.length >= 30) {
       e.target.preventDefault();
     }
   }
 
-  mobile_pattern: any = new RegExp(/^[0-9+\s]*$/);
-
+  // validate number to accepr only number, space, plus and 30 letters
   mobile_func(e: any): any {
     let number = String.fromCharCode(e.which);
-    if (!this.mobile_pattern.test(number)) {
+
+    if (!new RegExp(/^[0-9+\s]*$/).test(number)) {
       return false
     } else if (e.target.value.length >= 17) {
       e.target.preventDefault();
     }
   }
 
+  // validate age to accept only number, and 3 letters
   age_pattern: any = new RegExp(/^[0-9]{0,3}$/)
   age_func(e: any): any {
     let age = String.fromCharCode(e.which);

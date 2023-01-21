@@ -1,14 +1,14 @@
 <form (ngSubmit)="onSubmit_func($event)" [formGroup]="form" autocomplete="off">
-  <div class="heading">
-    <span *ngIf="id"> Edit Customer</span>
-    <span *ngIf="!id"> Create Customer</span>
-  </div>
   <div class="customer_registration_container">
+    <div class="heading">
+      <span *ngIf="id"> Edit Customer</span>
+      <span *ngIf="!id"> Create Customer</span>
+    </div>
     <div class="inner_box">
 
       <!-- First Name -->
       <div class="input_field">
-        <label for="firstname">First Name :</label>
+        <label for="firstname">*First Name :</label>
         <input type="text" id="firstname" formControlName="firstName" [(ngModel)]="customer.firstName"
           (keypress)="first_func($event)">
       </div>
@@ -16,10 +16,12 @@
         name is necessary </div>
       <div *ngIf="firstName!.errors?.['minlength'] && (firstName!.touched || firstName!.dirty)" class="danger"> First
         name is too short</div>
+      <div *ngIf="firstName!.errors?.['pattern'] && (firstName!.touched || firstName!.dirty)" class="danger"> First
+        name is not valid</div>
 
       <!-- Last Name -->
       <div class="input_field">
-        <label for="lastname">Last Name :</label>
+        <label for="lastname">*Last Name :</label>
         <input type="text" id="lastname" formControlName="lastName" [(ngModel)]="customer.lastName"
           (keypress)="last_func($event)">
       </div>
@@ -27,10 +29,12 @@
         necessary </div>
       <div *ngIf="lastName!.errors?.['minlength'] && (lastName!.touched || lastName!.dirty)" class="danger"> Last name
         is too short</div>
+      <div *ngIf="lastName!.errors?.['pattern'] && (lastName!.touched || lastName!.dirty)" class="danger"> Last name
+        is Not Valid</div>
 
       <!-- Date Of Birth -->
       <div class="input_field">
-        <label for="dateofbirth">Date Of Birth :</label>
+        <label for="dateofbirth">*Date Of Birth :</label>
         <input type="date" id="dateofbirth" formControlName="dateOfBirth" [(ngModel)]="customer.dateOfBirth"
           min="{{minDate}}" max="{{maxDate}}">
       </div>
@@ -43,7 +47,7 @@
 
       <!-- Mobile -->
       <div class="input_field">
-        <label for="mobile">Mobile :</label>
+        <label for="mobile">*Mobile :</label>
         <input type="text" id="mobile" formControlName="mobileNumber" [(ngModel)]="customer.mobileNumber"
           (keypress)="mobile_func($event)" (copy)="$event.preventDefault()" (paste)="$event.preventDefault()">
       </div>
@@ -70,7 +74,7 @@
 
       <!-- Age  -->
       <div class="input_field">
-        <label for="age">Age :</label>
+        <label for="age">*Age :</label>
         <input type="text" id="age" formControlName="age" [(ngModel)]="customer.age" (keypress)="age_func($event)"
           (copy)="$event.preventDefault()" (paste)="$event.preventDefault()">
       </div>
@@ -82,9 +86,9 @@
 
       <!-- Gender -->
       <div class="input_field radio">
-        <div><label for="gender">Gender :</label></div>
+        <div><label for="gender">*Gender :</label></div>
         <div class="sub_gender">
-          <input type="radio" id="male" formControlName="gender" [(ngModel)]="customer.gender" value="male"
+          <input type="radio" id="male" formControlName="gender" [(ngModel)]="customer.gender" value="male" checked
             name="gender">
           <label for="male">Male </label>
           <input type="radio" id="female" formControlName="gender" [(ngModel)]="customer.gender" value="female"
@@ -92,11 +96,10 @@
           <label for="female">Female</label>
         </div>
       </div>
-      <span style="margin : 0 0 0 46%;" class="danger" *ngIf="gender &&  gender.invalid">This field is necessary</span>
 
       <!-- Email -->
       <div class="input_field">
-        <label for="email">Email :</label>
+        <label for="email">*Email :</label>
         <input type="text" id="emial" formControlName="email" [(ngModel)]="customer.email">
       </div>
       <span *ngIf="email && email.errors?.['required'] && (email.touched || email.dirty)" class="danger">Email is

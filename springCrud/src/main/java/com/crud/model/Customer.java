@@ -21,9 +21,11 @@ public class Customer {
 	private int id;
 
 	@Column(length = 30, nullable = false)
+	@Size(min = 2,max = 30)
 	private String firstName;
 
 	@Column(length = 30, nullable = false)
+	@Size(min = 2,max = 30)
 	private String lastName;
 
 	@Column(nullable = false, columnDefinition = "DATE")
@@ -34,10 +36,10 @@ public class Customer {
 	@Size(min = 10, max = 17)
 	private String mobileNumber;
 
-	@Column(length = 255,columnDefinition = "TEXT")
+	@Column(columnDefinition = "TEXT")
 	private String addressOne;
 
-	@Column(length = 255,columnDefinition = "TEXT")
+	@Column(columnDefinition = "TEXT")
 	private String addressTwo;
 
 	@Column(columnDefinition = "SMALLINT", nullable = false)

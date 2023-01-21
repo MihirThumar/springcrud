@@ -18,6 +18,7 @@ import com.crud.system.RestResponse;
 @CrossOrigin(origins = "http://localhost:4200")
 public class MainController {
 
+	// need to call service instead of service
 	@Autowired
 	private CustomerServiceImpl customerServiceImpl;
 

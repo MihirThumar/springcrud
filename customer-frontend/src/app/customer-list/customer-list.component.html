@@ -9,7 +9,7 @@
   </div>
   <table class="table">
     <thead>
-      <th hidden>id</th>
+      <th >id</th>
       <th>Name</th>
       <th>Date of Birth</th>
       <th>Mobile Number</th>
@@ -19,9 +19,9 @@
     </thead>
     <tbody>
       <tr *ngFor="let customer of customers;">
-        <td hidden>{{customer.id}}</td>
+        <td >{{customer.id}}</td>
         <td>{{customer.firstName}} {{customer.lastName}}</td>
-        <td>{{customer.dateOfBirth}}</td>
+        <td>{{customer.dateOfBirth | date: 'dd - MM - yyyy'}}</td>
         <td>{{customer.mobileNumber}}</td>
         <td>{{customer.addressOne}} {{customer.addressTwo}}</td>
         <td>{{customer.gender}}</td>
@@ -32,7 +32,6 @@
       </tr>
     </tbody>
   </table>
-  <!-- (click)="updateCustomer(customer.id)" -->
 </div>
 <div class="pop_up" #popup_mssg>
   <div class="warning_div">

@@ -1,5 +1,5 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { CustomerService } from '../customer.service';
 import { Customer } from '../customer';
 
@@ -16,24 +16,14 @@ export class CustomerListComponent {
 
   customers: Customer[] = [];
 
+  // get list of all customer
   private getCustmores() {
     this.custmoreService.getCustomers().subscribe(data => {
       this.customers = data;
-      for (let c of this.customers) {
-        let o_date = new Date(c.dateOfBirth);
-        let day: any = o_date.getDate();
-        let month: any = o_date.getMonth() + 1;
-        if (day < 10) {
-          day = '0' + day;
-        }
-        if (month < 10) {
-          month = '0' + month;
-        }
-        c.dateOfBirth = day + '-' + month + '-' + o_date.getFullYear();
-      }
     });
   }
 
+  // navigate the customer to update
   updateCustomer(id: number) {
     this.router.navigate(['customer/register', id]);
   }
@@ -42,6 +32,7 @@ export class CustomerListComponent {
 
   delete_id!: number;
 
+  // open the delete popup
   delete_popup(id: number) {
     setTimeout(() => {
       this.popup.nativeElement.style = 'display:flex';
@@ -49,15 +40,18 @@ export class CustomerListComponent {
     this.delete_id = id;
   }
 
+  // close the delete popup
   backToCustmer(e: any) {
     this.popup.nativeElement.style = 'display:none';
   }
 
+  // navigate the customer to delete function
   delete_custmore(e: any) {
     this.deleteCustomer(this.delete_id);
     this.popup.nativeElement.style = 'display:none';
   }
 
+  // delete the customer
   deleteCustomer(id: number) {
     this.custmoreService.deleteCustomer(id).subscribe(data => {
       console.log(data);

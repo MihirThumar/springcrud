@@ -20,7 +20,6 @@ export class CustomerService {
 
   private url = {
     getData: "http://localhost:8080/view-customer",
-    getById: "http://localhost:8080/view-customer",
     post: "http://localhost:8080/add-customer",
     put: "http://localhost:8080/update-customer",
     delete: "http://localhost:8080/delete-customer"
@@ -33,7 +32,7 @@ export class CustomerService {
   }
 
   getCustomerById(id: number): Observable<Customer>{
-    return this.httpclient.get<Customer>(`${this.url.getById}/${id}`);
+    return this.httpclient.get<Customer>(`${this.url.getData}/${id}`);
   }
 
   createCustomre(customer: Customer): Observable<Object>{

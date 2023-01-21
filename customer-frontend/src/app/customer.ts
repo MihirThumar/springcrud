@@ -13,7 +13,7 @@ export class Customer {
   addressOne!: string;
   addressTwo!: string;
   age!: number;
-  gender!: Genders;
+  gender!: 'male' | 'female';
   email!: string;
 
 }

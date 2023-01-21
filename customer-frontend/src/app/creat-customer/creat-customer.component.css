@@ -16,8 +16,8 @@
 .heading {
   color: white;
   display: flex;
-  justify-content: center;
-  margin-top: 3vw;
+  align-items: center;
+  margin-bottom: 2%;
   font-size: 2vw;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
