@@ -12,6 +12,7 @@ import { isEmpty } from 'rxjs';
   styleUrls: ['./creat-customer.component.css']
 })
 export class CreatCustomerComponent implements OnInit {
+  [x: string]: any;
 
   id!: number;
   customer: Customer = new Customer();
@@ -22,7 +23,6 @@ export class CreatCustomerComponent implements OnInit {
     this.customer.gender = 'male';
     this.id = this.route.snapshot.params['id'];
     if (this.id != null) {
-      console.log(this.id);
       this.customerService.getCustomerById(this.id).subscribe(data => {
         this.customer = data;
       }, error => console.log(error));
@@ -49,6 +49,7 @@ export class CreatCustomerComponent implements OnInit {
   dateMssg: any;
   newDate: any;
   gender_mssg: any;
+  error_mssg!: String;
 
   // select the customer is new or old
   onSubmit_func(e: any) {
@@ -70,17 +71,10 @@ export class CreatCustomerComponent implements OnInit {
       if (this.newDate <= this.maxDate) {
         if (d_input.getFullYear() >= 1950) {
           this.customerService.createCustomre(this.customer).subscribe(data => {
-            console.log(data);
             this.router.navigate(['/customer']);
           },
             error => {
-              console.log(error.error);
-              if (error.error == 'could not execute statement; SQL [n/a]; constraint [customer.UK_dwk6cx0afu8bs9o4t536v1j5v]') {
-                this.email?.setErrors({ 'incorrect': true });
-              }
-              if (error.error == 'could not execute statement; SQL [n/a]; constraint [customer.UK_5v8hijx47m783qo8i4sox2n5t]') {
-                this.mobileNumber?.setErrors({ 'incorrect': true });
-              }
+              this.error_mssg = error.error;
             });
         } else {
           this.dateOfBirth?.setErrors({ 'past': true });
@@ -101,17 +95,11 @@ export class CreatCustomerComponent implements OnInit {
     } else {
       if (this.newDate <= this.maxDate) {
         if (d_input.getFullYear() >= 1950) {
-          this.customerService.updateCustomer(this.id,this.customer).subscribe(data => {
+          this.customerService.updateCustomer(this.id, this.customer).subscribe(data => {
             this.router.navigate(['/customer']);
           },
             error => {
-              console.log(error.error);
-              if (error.error == 'could not execute statement; SQL [n/a]; constraint [customer.UK_dwk6cx0afu8bs9o4t536v1j5v]') {
-                this.email?.setErrors({ 'incorrect': true });
-              }
-              if (error.error == 'could not execute statement; SQL [n/a]; constraint [customer.UK_5v8hijx47m783qo8i4sox2n5t]') {
-                this.mobileNumber?.setErrors({ 'incorrect': true });
-              }
+              this.error_mssg = error.error;
             });
         } else {
           this.dateOfBirth?.setErrors({ 'past': true });
@@ -129,7 +117,7 @@ export class CreatCustomerComponent implements OnInit {
     mobileNumber: new FormControl('', [Validators.required, Validators.minLength(10)]),
     addressOne: new FormControl(''),
     addressTwo: new FormControl(''),
-    age: new FormControl('', [Validators.required, Validators.min(18), Validators.max(100)]),
+    age: new FormControl('', [Validators.required,Validators.pattern(/^[0-9]{0,3}$/), Validators.min(18), Validators.max(100)]),
     gender: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.pattern(/^\w+@[a-zA-Z0-9_]+?\.[a-zA-Z]{2,3}$/)])
   });
@@ -167,14 +155,14 @@ export class CreatCustomerComponent implements OnInit {
 
   // validate firstname to accept only 30 letters
   first_func(e: any) {
-     if (e.target.value.length >= 30) {
+    if (e.target.value.length >= 30) {
       e.target.preventDefault();
     }
   }
 
   // validate lastname to accept only 30 letters
   last_func(e: any) {
-   if (e.target.value.length >= 30) {
+    if (e.target.value.length >= 30) {
       e.target.preventDefault();
     }
   }
@@ -190,13 +178,9 @@ export class CreatCustomerComponent implements OnInit {
     }
   }
 
-  // validate age to accept only number, and 3 letters
-  age_pattern: any = new RegExp(/^[0-9]{0,3}$/)
+  // validate 3 letters
   age_func(e: any): any {
-    let age = String.fromCharCode(e.which);
-    if (!this.age_pattern.test(age)) {
-      return false;
-    } else if (e.target.value.length >= 3) {
+    if (e.target.value.length >= 3) {
       e.target.preventDefault();
     }
   }

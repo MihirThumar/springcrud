@@ -21,11 +21,11 @@ public class Customer {
 	private int id;
 
 	@Column(length = 30, nullable = false)
-	@Size(min = 2,max = 30)
+	@Size(min = 2, max = 30)
 	private String firstName;
 
 	@Column(length = 30, nullable = false)
-	@Size(min = 2,max = 30)
+	@Size(min = 2, max = 30)
 	private String lastName;
 
 	@Column(nullable = false, columnDefinition = "DATE")
@@ -45,7 +45,7 @@ public class Customer {
 	@Column(columnDefinition = "SMALLINT", nullable = false)
 	@Min(1)
 	@Max(150)
-	private int age;   
+	private int age;
 
 	@Column(nullable = false, columnDefinition = "ENUM('male','female')")
 	private String gender;

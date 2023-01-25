@@ -55,8 +55,6 @@
         class="danger">This field is necessary</span>
       <span *ngIf="mobileNumber && mobileNumber.errors?.['minlength'] && (mobileNumber.touched || mobileNumber.dirty)"
         class="danger">Number must be minimum 10</span>
-      <span *ngIf="mobileNumber && mobileNumber.errors?.['incorrect']" class="danger">This number is already
-        exist</span>
 
       <!-- Address - 1 -->
       <div class="input_field">
@@ -75,7 +73,7 @@
       <!-- Age  -->
       <div class="input_field">
         <label for="age">*Age :</label>
-        <input type="text" id="age" formControlName="age" [(ngModel)]="customer.age" (keypress)="age_func($event)"
+        <input type="number" id="age" formControlName="age" [(ngModel)]="customer.age" (keypress)="age_func($event)"
           (copy)="$event.preventDefault()" (paste)="$event.preventDefault()">
       </div>
       <span *ngIf="age && age.errors?.['required'] && (age.touched || age.dirty)" class="danger">
@@ -106,7 +104,6 @@
         required</span>
       <span *ngIf="email && email.errors?.['pattern'] && (email.touched || email.dirty)" class="danger">Email is not
         valid</span>
-      <span *ngIf="email && email.errors?.['incorrect']" class="danger">This emial is already exist</span>
 
       <!-- Button -->
       <div class="btn_class">
@@ -118,6 +115,7 @@
       </div>
       <span class="danger" style="margin: 2% 0 0 24%;" *ngIf="form && form.errors?.['incoorect']">Please fill all data
         with valid information.</span>
+      <span class="danger" style="margin: 2% 0 0 24%;" *ngIf="form && form.touched || form.dirty">{{error_mssg}}</span>
     </div>
   </div>
 </form>

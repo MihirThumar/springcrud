@@ -1,22 +1,25 @@
 package com.crud.service;
 
+import java.util.List;
+import java.util.Map;
+
 import com.crud.model.Customer;
 
 public interface CustomerService {
 
 	// adding customer
-	public Object addCustomer(Customer customer);
+	public Customer addCustomer(Customer customer);
 
 	// getting list of all customer adding customer
-	public Object getCustomer();
+	public List<Customer> getCustomer();
 
 	// get customer by id
-	public Object getCustomerById(int id);
+	public Customer getCustomerById(int id);
 
 	// updating customer
-	public Object updateCustomer(Customer customer, int id);
-	
+	public Customer updateCustomer(Customer customer, int id);
+
 	// deleting customer
-	public 	Object deleteCustomer(Integer id);
+	public Map<String, Boolean> deleteCustomer(Integer id);
 
 }

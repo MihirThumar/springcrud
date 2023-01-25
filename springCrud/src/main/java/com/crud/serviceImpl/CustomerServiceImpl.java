@@ -1,17 +1,16 @@
 package com.crud.serviceImpl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.crud.dao.CustomerRepository;
 import com.crud.model.Customer;
 import com.crud.service.CustomerService;
-import com.crud.system.RestResponse;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -21,45 +20,68 @@ public class CustomerServiceImpl implements CustomerService {
 
 	// adding customer
 	@Override
-	public Object addCustomer(Customer customer) {
+	public Customer addCustomer(Customer customer) {
 		try {
-			Object addCustomer = customerRepository.save(customer);
-			return addCustomer;
+			boolean existsByEmail = customerRepository.existsByEmail(customer.getEmail());
+			boolean existsByMobileNumber = customerRepository.existsByMobileNumber(customer.getMobileNumber());
+
+			String errorMssg = "";
+			if (existsByEmail == true) {
+				errorMssg = "This email is already exists";
+				throw new RuntimeException(errorMssg);
+			}
+			if (existsByMobileNumber == true) {
+				errorMssg = "This mobile number is already exists";
+				throw new RuntimeException(errorMssg);
+			}
+
+			return customerRepository.save(customer);
 		} catch (Exception e) {
-			e.getMessage();
-			return new ResponseEntity<Object>(e.getMessage(), new HttpHeaders(), 404);
+			e.printStackTrace();
+			throw e;
 		}
 	}
 
 	// getting list of all customer adding customer
 	@Override
-	public Object getCustomer() {
+	public List<Customer> getCustomer() {
 		try {
-			 List<Customer> findAllByDescId = customerRepository.findAllByOrderByIdDesc();
+			List<Customer> findAllByDescId = customerRepository.findAllByOrderByIdDesc();
 			return findAllByDescId;
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<Object>(e.getMessage(), new HttpHeaders(), 404);
+			throw e;
 		}
 	}
 
 	// get customer by id
-	public Object getCustomerById(int id) {
+	public Customer getCustomerById(int id) {
 		try {
-			Optional<Customer> customer = customerRepository.findById(id);
-			return customer;
+			Optional<Customer> findById = customerRepository.findById(id);
+			return findById.get();
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<Object>(e.getMessage(), new HttpHeaders(), 404);
+			throw e;
 		}
 	}
 
 	// updating customer
 	@Override
-	public Object updateCustomer(Customer newCustomer, int id) {
+	public Customer updateCustomer(Customer newCustomer, int id) {
 		try {
 			Optional<Customer> optional = customerRepository.findById(id);
 			Customer customer = optional.get();
+			boolean exitsByEmail = customerRepository.existsByEmail(newCustomer.getEmail());
+			boolean existsByMobileNumber = customerRepository.existsByMobileNumber(newCustomer.getMobileNumber());
+			String errorMssg = "";
+			if (exitsByEmail && !(customer.getEmail().equals(newCustomer.getEmail()))) {
+				errorMssg = "This email is already exists";
+				throw new RuntimeException(errorMssg);
+			}
+			if (existsByMobileNumber && !(customer.getMobileNumber().equals(newCustomer.getMobileNumber()))) {
+				errorMssg = "This mobile number is already exists";
+				throw new RuntimeException(errorMssg);
+			}
 			customer.setFirstName(newCustomer.getFirstName());
 			customer.setLastName(newCustomer.getLastName());
 			customer.setAddressOne(newCustomer.getAddressOne());
@@ -70,25 +92,25 @@ public class CustomerServiceImpl implements CustomerService {
 			customer.setMobileNumber(newCustomer.getMobileNumber());
 			customer.setGender(newCustomer.getGender());
 			Customer save = customerRepository.save(customer);
-			return new RestResponse().setCode(202).setStatus(true).setMessage("Succesfully updated the customer")
-					.setData(save);
+			return save;
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<Object>(e.getMessage(), new HttpHeaders(), 404);
+			throw e;
 		}
 	}
 
 	// deleting customer
 	@Override
-	public Object deleteCustomer(Integer id) {
+	public Map<String, Boolean> deleteCustomer(Integer id) {
 		try {
 			Optional<Customer> customer = customerRepository.findById(id);
 			customerRepository.delete(customer.get());
-			return new RestResponse().setCode(202).setStatus(true).setMessage("Succesfully delete the customer")
-					.setData(customer);
+			Map<String, Boolean> response = new HashMap<>();
+			response.put("deleted", Boolean.TRUE);
+			return response;
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<Object>(e.getMessage(), new HttpHeaders(), 404);
+			throw e;
 		}
 	}
 
