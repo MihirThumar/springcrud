@@ -28,7 +28,7 @@ export class CreatCustomerComponent implements OnInit {
       }, error => console.log(error));
     }
     let today: any = new Date();
-    let day: string | number = today.getDate();
+    let day: any = today.getDate();
     let month: any = today.getMonth() + 1;
     let year: string | number = today.getFullYear();
     if (day < 10) {
