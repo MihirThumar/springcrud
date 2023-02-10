@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.crud</groupId>
-	<artifactId>springCrud</artifactId>
+	<artifactId>springbootcrud</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>springCrud</name>
 	<description>Demo project for Spring Boot</description>
